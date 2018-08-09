@@ -150,6 +150,7 @@ body {
 img {
     height: 100%;
     width: auto;
+    color: var(--gray-lt);
 }
 
 p {
@@ -219,6 +220,7 @@ a {
     font-size: 1.25em;
     color: var(--bluegray-dk);
     font-family: "Noto Sans", sans-serif;
+    text-align: center;
     padding: .25em .5em;
     border-radius: .25em;
     border: none;

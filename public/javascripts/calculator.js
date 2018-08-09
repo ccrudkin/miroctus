@@ -29,19 +29,25 @@ function inputHandler() {
 }
 
 function updateInput(q) {
-    $('#calcInputLabel').fadeOut(250, () => {
-        document.getElementById('calcInputLabel').innerHTML = inputs[q];
-        if (q >= 4) {
-            $('#calcInputButton').fadeOut(250, () => {
-                document.getElementById('calcInputButton').innerHTML = 'Finish';
-                $('#calcInputButton').fadeIn(250);
-            });
-        } else {
-            document.getElementById('calcInputButton').innerHTML = 'Next';
-        }
-        $('#calcInputLabel').fadeIn(250);
-        document.getElementById('calcInput').value = '';
-    });
+    if (q > 4) {
+        // generate results and display here
+        $("#calcForm").fadeOut();
+        return;
+    } else {
+        $('#calcInputLabel').fadeOut(250, () => {
+            document.getElementById('calcInputLabel').innerHTML = inputs[q];
+            if (q === 4) {
+                $('#calcInputButton').fadeOut(250, () => {
+                    document.getElementById('calcInputButton').innerHTML = 'Finish';
+                    $('#calcInputButton').fadeIn(250);
+                });
+            } else {
+                document.getElementById('calcInputButton').innerHTML = 'Next';
+            }
+            $('#calcInputLabel').fadeIn(250);
+            document.getElementById('calcInput').value = '';
+        });
+    }
 }
 
 function repromptInput(q) {
