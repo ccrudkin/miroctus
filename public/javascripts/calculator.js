@@ -31,7 +31,10 @@ function inputHandler() {
 function updateInput(q) {
     if (q > 4) {
         // generate results and display here
-        $("#calcForm").fadeOut();
+        $("#calcForm").fadeOut(400, () => {
+            document.getElementById('resultsField').innerHTML = "Your results will populate here."
+            $("#resultsField").fadeIn();
+        });
         return;
     } else {
         $('#calcInputLabel').fadeOut(250, () => {
