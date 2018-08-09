@@ -10,6 +10,9 @@
     --aqua-dk: #0b5345;
     --blue-dk: #1b4f72;
     --gray-lt: #EBF5FB;
+    --bluegray-dk: #566573;
+    --nav-width: 20%;
+    --nav-left: -60%;
 }
 
 html {
@@ -22,10 +25,101 @@ html {
 
 body {
     font-family: "Noto Sans", sans-serif;
+    margin: 0;
 }
 
 .mast {
     font-size: .55em;
+    width: 100%;
+}
+
+.graycover {
+    background: var(--bluegray-dk);
+    opacity: .5;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 6;
+    display: none;
+}
+
+.nav {
+    position: fixed;
+    height: 100%;
+    width: var(--nav-width);
+    left: var(--nav-left);
+    background-color: var(--blue-dk);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.navItems {
+    width: 100%;
+    font-size: 1.5em;
+    color: var(--gray-lt);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3em 0em;
+}
+
+.navItem {
+    padding: .35em 15%;
+}
+
+.menuLink {
+    color: var(--gray-lt);
+    text-decoration: none;
+}
+
+.menuLink:hover {
+    color: var(--blue-dk);
+}
+
+.navItem:hover {
+    color: var(--blue-dk);
+    background-color: var(--gray-lt);
+    cursor: pointer;
+}
+
+.navX {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 2em 1em 1em 1em;
+}
+
+#navXimg {
+    width: 2em;
+    height: 2em;
+}
+
+#navXimg:hover {
+    cursor: pointer;
+}
+
+.hamburger {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#hamburgerText {
+    color: var(--gray-lt);
+    font-size: 1.5rem;
+}
+
+.hamburger img {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.hamburgerButton:hover {
+    cursor: pointer;
 }
 
 .main {
@@ -79,6 +173,7 @@ a {
 .headline {
     color: var(--gray-lt);
     font-size: 2em;
+    text-align: center;
 }
 
 .textHighlight {
@@ -120,10 +215,29 @@ a {
 
 .interactiveField {
     font-size: 1.25em;
+    color: var(--bluegray-dk);
     font-family: "Noto Sans", sans-serif;
-    padding: .25em;
+    padding: .25em .5em;
     border-radius: .25em;
     border: none;
     width: 15em;
     margin: 1em;
+}
+
+@media only screen and (max-width: 900px) {
+    :root {
+        --nav-width: 40%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    :root {
+        --nav-width: 60%;
+    }
+    .greeting {
+        font-size: 4em;
+    }
+    .mast {
+        font-size: 1em;
+    }
 }
