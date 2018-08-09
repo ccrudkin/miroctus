@@ -2,6 +2,7 @@ TODO:
 
 -Minimum viable product.
     -Calculator
+        -input validation
         -Session storage?
         -Basic result charts
         -Detailed result advice
