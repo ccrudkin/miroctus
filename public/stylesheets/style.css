@@ -11,6 +11,7 @@
     --blue-dk: #1b4f72;
     --gray-lt: #EBF5FB;
     --bluegray-dk: #566573;
+    --bluegray-lt: #95A5A6;
     --nav-width: 20%;
     --nav-left: -60%;
 }
@@ -49,7 +50,7 @@ body {
     height: 100%;
     width: var(--nav-width);
     left: var(--nav-left);
-    background-color: var(--blue-dk);
+    background-color: var(--bluegray-lt);
     z-index: 10;
     display: flex;
     flex-direction: column;
@@ -76,11 +77,11 @@ body {
 }
 
 .menuLink:hover {
-    color: var(--blue-dk);
+    color: var(--bluegray-lt);
 }
 
 .navItem:hover {
-    color: var(--blue-dk);
+    color: var(--bluegray-lt);
     background-color: var(--gray-lt);
     cursor: pointer;
 }
@@ -193,6 +194,7 @@ a {
     border: 2px solid var(--gray-lt);
     border-radius: .25em;
     padding: .15em .75em;
+    margin: .5em;
 }
 
 .buttons:hover {
@@ -205,7 +207,7 @@ a {
     font-size: 1.25em;
     color: var(--gray-lt);
     font-family: "Noto Sans", sans-serif;
-    width: 25em;
+    max-width: 25em;
     text-align: center;
 }
 
@@ -226,18 +228,27 @@ a {
 
 @media only screen and (max-width: 900px) {
     :root {
-        --nav-width: 40%;
+        --nav-width: 30%;
     }
 }
 
 @media only screen and (max-width: 600px) {
     :root {
-        --nav-width: 60%;
+        --nav-width: 50%;
     }
     .greeting {
         font-size: 4em;
     }
     .mast {
         font-size: 1em;
+    }
+    .hamburger {
+        margin-bottom: 1.5em;
+    }
+    .interactiveField {
+        width: 90%;
+    }
+    .textHighlight {
+        width: 95%;
     }
 }
