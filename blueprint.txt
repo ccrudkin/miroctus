@@ -1,0 +1,24 @@
+TODO:
+
+-Minimum viable product.
+    -Calculator
+        -Session storage?
+        -Basic result charts
+        -Detailed result advice
+            -Paywall?
+    -Special advice
+    -Learning page with resources
+
+
+
+
+
+SITE MAP:
+
+|-Index
+|-Calculator
+    |-Special advice and tools
+    |-Basic results
+    |-Detailed results (Paywall?)
+|-Learning/resources
+|-Contact
