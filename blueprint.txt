@@ -4,6 +4,7 @@ TODO:
     -Calculator
         -input validation
         -help pages for confusing questions
+        -autofocus on input between questions [x]
         -Session storage?
         -Basic result charts
         -Detailed result advice

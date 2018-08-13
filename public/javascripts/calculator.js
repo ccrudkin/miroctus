@@ -1,6 +1,9 @@
 $(document).ready(() => {
     updateInput(0);
     inputHandler();
+    $('#calcInput').focus(() => {
+        setTimeout(() => { document.getElementById('calcInput').scrollIntoView() }, 200);
+    });
 });
 
 function inputHandler() {
@@ -60,6 +63,9 @@ function updateInput(q) {
             $('#calcInputLabel').fadeIn(250);
             document.getElementById('calcInput').value = '';
         });
+        if (q > 0) {
+            document.getElementById('calcInput').focus();
+        }
     }
 }
 
