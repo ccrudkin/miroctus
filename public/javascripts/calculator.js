@@ -19,6 +19,7 @@ function inputHandler() {
         if (event.keyCode === enter) {
             let input = document.getElementById('calcInput').value;
             if (validateInput(input)) {
+                userResponses[q] = input;
                 q += 1; // increment through question list
                 updateInput(q);
             } else {
@@ -29,17 +30,23 @@ function inputHandler() {
 }
 
 function updateInput(q) {
-    if (q > 4) {
+    if (q >= Object.keys(inputs).length) {
         // generate results and display here
         $("#calcForm").fadeOut(400, () => {
-            document.getElementById('resultsField').innerHTML = "Your results will populate here."
+            let years = parseInt(userResponses[1] - userResponses[0]);
+            let i = parseInt(userResponses[2]);
+            let a = parseInt(userResponses[3] * 12);
+            let r = parseInt(riskReturn[userResponses[7]]);
+            let nestEgg = totalGrowth(years, i, a, r);
+            document.getElementById('resultsField').innerHTML = 'Your balance at retirement: $' + Math.round(nestEgg);
             $("#resultsField").fadeIn();
+            console.log(userResponses);
         });
         return;
     } else {
         $('#calcInputLabel').fadeOut(250, () => {
             document.getElementById('calcInputLabel').innerHTML = inputs[q];
-            if (q === 4) {
+            if (q === (Object.keys(inputs).length - 1)) {
                 $('#calcInputButton').fadeOut(250, () => {
                     document.getElementById('calcInputButton').innerHTML = 'Finish';
                     $('#calcInputButton').fadeIn(250);
@@ -71,15 +78,23 @@ function validateInput(input) {
 const inputs = {
     0: "Enter your current age:",
     1: "At what age do you want to retire?",
-    2: "How much would you invest immediately?",
-    3: "How much would you add to that investment each month?",
-    4: "What percent annual return do you expect? Enter '10' for a realistic starting point."
-}
+    2: "How much would you invest initially?",
+    3: "How much are you willing to save per month?",
+    4: "What is a rough estimate of your annual income?",
+    5: "What is a rough estimate of your monthly expenses? (Bills, groceries, mortgage, etc.)",
+    6: "What is a rough estimate of your liquid net worth, not including your home?",
+    7: "From 1-5, how agressively would you invest? Higher is riskier, but has more growth potential."
+};
 
 const reprompts = {
     0: "Please enter a valid age.",
     1: "Please enter a valid age of retirement.",
     2: "Please enter a valid dollar amount.",
     3: "Please enter a valid dollar amount.",
-    4: "Please enter a valid percentage."
-}
+    4: "Please enter a valid dollar amount.",
+    5: "Please enter a valid dollar amount.",
+    6: "Please enter a valid dollar amount.",
+    7: "Please enter a number between 1 and 5."
+};
+
+let userResponses = {};
