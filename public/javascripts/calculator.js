@@ -8,6 +8,7 @@ function inputHandler() {
     document.getElementById('calcInputButton').addEventListener('click', () => {
         let input = document.getElementById('calcInput').value;
         if (validateInput(input)) {
+            userResponses[q] = input;
             q += 1; // increment through question list
             updateInput(q);
         } else {
@@ -33,12 +34,14 @@ function updateInput(q) {
     if (q >= Object.keys(inputs).length) {
         // generate results and display here
         $("#calcForm").fadeOut(400, () => {
-            let years = parseInt(userResponses[1] - userResponses[0]);
-            let i = parseInt(userResponses[2]);
-            let a = parseInt(userResponses[3] * 12);
-            let r = parseInt(riskReturn[userResponses[7]]);
+            let years = parseFloat(userResponses[1] - userResponses[0]);
+            let i = parseFloat(userResponses[2]);
+            let a = parseFloat(userResponses[3] * 12);
+            let r = parseFloat(riskReturn[userResponses[7]]);
             let nestEgg = totalGrowth(years, i, a, r);
-            document.getElementById('resultsField').innerHTML = 'Your balance at retirement: $' + Math.round(nestEgg);
+            document.getElementById('resultsField').innerHTML = `<span>Your balance at retirement:</span>
+                                                                <br>
+                                                                <span class="headline">$${Math.round(nestEgg).toLocaleString()}</span>`;
             $("#resultsField").fadeIn();
             console.log(userResponses);
         });
