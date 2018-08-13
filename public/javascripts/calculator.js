@@ -10,8 +10,9 @@ function inputHandler() {
     let q = 0;
     document.getElementById('calcInputButton').addEventListener('click', () => {
         let input = document.getElementById('calcInput').value;
-        if (validateInput(input)) {
-            userResponses[q] = input;
+        let cleaned = validateInput(input);
+        if (cleaned) {
+            userResponses[q] = cleaned;
             q += 1; // increment through question list
             updateInput(q);
         } else {
@@ -22,8 +23,9 @@ function inputHandler() {
         let enter = 13;
         if (event.keyCode === enter) {
             let input = document.getElementById('calcInput').value;
-            if (validateInput(input)) {
-                userResponses[q] = input;
+            let cleaned = validateInput(input);
+            if (cleaned) {
+                userResponses[q] = cleaned;
                 q += 1; // increment through question list
                 updateInput(q);
             } else {
@@ -46,7 +48,7 @@ function updateInput(q) {
                                                                 <br>
                                                                 <span class="headline">$${Math.round(nestEgg).toLocaleString()}</span>`;
             $("#resultsField").fadeIn();
-            console.log(userResponses);
+            // console.log(userResponses);
         });
         return;
     } else {
@@ -63,9 +65,7 @@ function updateInput(q) {
             $('#calcInputLabel').fadeIn(250);
             document.getElementById('calcInput').value = '';
         });
-        if (q > 0) {
-            document.getElementById('calcInput').focus();
-        }
+        document.getElementById('calcInput').focus();
     }
 }
 
@@ -78,7 +78,14 @@ function repromptInput(q) {
 
 function validateInput(input) {
     if (input != '') {
-        return true;
+        let re = /[$,]+/g;
+        let nonDigit = /\D/;
+        input = input.replace(re, ''); // search for any $ or , and remove
+        if (nonDigit.test(input)) {
+            return false;
+        } else {
+            return input;
+        }
     } else {
         return false;
     }
@@ -88,7 +95,7 @@ const inputs = {
     0: "Enter your current age:",
     1: "At what age do you want to retire?",
     2: "How much would you invest initially?",
-    3: "How much are you willing to save per month?",
+    3: "How much are you willing to save and invest per month?",
     4: "What is a rough estimate of your annual income?",
     5: "What is a rough estimate of your monthly expenses? (Bills, groceries, mortgage, etc.)",
     6: "What is a rough estimate of your liquid net worth, not including your home?",

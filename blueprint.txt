@@ -3,6 +3,7 @@ TODO:
 -Minimum viable product.
     -Calculator
         -input validation
+        -input cleaning [x]
         -help pages for confusing questions
         -autofocus on input between questions [x]
         -Session storage?

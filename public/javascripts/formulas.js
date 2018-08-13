@@ -14,16 +14,15 @@ function annualGrowth(i, a, r) {
 }
 
 function totalGrowth(years, i, a, r) {
-    console.log(`Years: ${years}\n
-                Initial investment: ${i}\n
-                Annual additions: ${a}\n
-                Growth rate: ${r}`); // debugging
+    console.log(`Years: ${years}\n` +
+                `Initial investment: ${i}\n` +
+                `Annual additions: ${a}\n` +
+                `Growth rate: ${r}`); // debugging
     for (let j = 0; j < years; j++) {
-        console.log(`Year ${j} start -- Total: $${i}`); // debugging
+        // console.log(`Year ${j} start -- Total: $${i}`); // debugging
         let aAdjusted = a * (1 + inflation) ** (j + 1);
-        console.log(`Adjusted addition for year ${j}: ${aAdjusted}`);
+        // console.log(`Adjusted addition for year ${j}: ${aAdjusted}`);
         i = annualGrowth(i, aAdjusted, r);
     }
-    console.log(Math.round((i * 100) / 100));
     return i;
 }

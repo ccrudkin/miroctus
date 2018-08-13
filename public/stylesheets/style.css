@@ -7,7 +7,7 @@
     --aqua-lt: #45b39d;
     --blue-lt: #5dade2;
     --green-dk: #186a3b;
-    --aqua-dk: #0b5345;
+    --aqua-dk: #0E6655;
     --blue-dk: #1b4f72;
     --gray-lt: #EBF5FB;
     --bluegray-dk: #566573;
@@ -50,7 +50,7 @@ body {
     height: 100%;
     width: var(--nav-width);
     left: var(--nav-left);
-    background-color: var(--bluegray-lt);
+    background-color: var(--aqua-dk);
     z-index: 10;
     display: flex;
     flex-direction: column;
@@ -77,11 +77,11 @@ body {
 }
 
 .menuLink:hover {
-    color: var(--bluegray-lt);
+    color: var(--bluegray-dk);
 }
 
 .navItem:hover {
-    color: var(--bluegray-lt);
+    color: var(--bluegray-dk);
     background-color: var(--gray-lt);
     cursor: pointer;
 }
