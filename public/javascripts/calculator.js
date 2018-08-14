@@ -2,7 +2,7 @@ $(document).ready(() => {
     updateInput(0);
     inputHandler();
     $('#calcInput').focus(() => {
-        setTimeout(() => { document.getElementById('calcInput').scrollIntoView() }, 200);
+        setTimeout(() => { document.getElementById('calcInput').scrollIntoView() }, 250);
     });
 });
 
@@ -62,7 +62,7 @@ function updateInput(q) {
                     <li>maintain a standard of living at the future equivalent of $${income.toLocaleString()} per year (annual income minus savings rate)</li>
                     <li>live to be 85</li> 
                     <li>take inflation into account over your retirement</li>
-                    <li>move your investment portfolio to a low-risk allocation</li>
+                    <li>move your investment portfolio to a low-risk allocation in retirement</li>
                 </ul>
                 </p>`;
         });
