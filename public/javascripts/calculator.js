@@ -44,12 +44,30 @@ function updateInput(q) {
             let a = parseFloat(userResponses[3] * 12);
             let r = parseFloat(riskReturn[userResponses[7]]);
             let nestEgg = totalGrowth(years, i, a, r);
-            document.getElementById('resultsField').innerHTML = `<span>Your balance at retirement:</span>
+            document.getElementById('resultsField').innerHTML = `<span>Your portfolio at retirement:</span>
                                                                 <br>
                                                                 <span class="headline">$${Math.round(nestEgg).toLocaleString()}</span>`;
-            $("#resultsField").fadeIn();
+            $(".results").fadeIn();
             // console.log(userResponses);
+            let retireLength = parseFloat(85 - userResponses[1]);
+            let income = parseFloat(userResponses[4] - userResponses[3] * 12);
+            let retireEnd = totalWithDraw(years, retireLength, nestEgg, income, riskReturn[2]);
+            document.getElementById('breakdownField').innerHTML = 
+                `<p class="sizeUp">Will that get you through retirement?</p>
+                <p>At the end of retirement, you will have:</p>
+                <span class="headline">$${Math.round(retireEnd).toLocaleString()}</span>
+                <p> 
+                <ul>
+                    This assumes that you will:
+                    <li>maintain a standard of living at the future equivalent of $${income.toLocaleString()} per year (annual income minus savings rate)</li>
+                    <li>live to be 85</li> 
+                    <li>take inflation into account over your retirement</li>
+                    <li>move your investment portfolio to a low-risk allocation</li>
+                </ul>
+                </p>`;
         });
+        $(".breakdown").fadeIn();
+        $(".backgroundFade").fadeIn();
         return;
     } else {
         $('#calcInputLabel').fadeOut(250, () => {

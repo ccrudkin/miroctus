@@ -161,6 +161,10 @@ a {
     text-decoration: none;
 }
 
+.sizeUp {
+    font-size: 1.5em;
+}
+
 .medBlank {
     height: 5em;
 }
@@ -175,7 +179,9 @@ a {
 .headline {
     color: var(--gray-lt);
     font-size: 2em;
+    width: 100%;
     text-align: center;
+    overflow: hidden;
 }
 
 .textHighlight {
@@ -233,6 +239,26 @@ a {
     color: var(--gray-lt);
     font-size: 2em;
     text-align: center;
+    width: 95%;
+    overflow: hidden;
+}
+
+.breakdown {
+    display: none;
+    top: 0;
+    color: var(--gray-lt);
+    font-size: 1.5em;
+    text-align: center;
+    width: 75%;
+    margin: 2em 0em;
+    background: rgba(235, 245, 251, .1);
+    border-radius: 1em;
+    padding: .5em;
+}
+
+ul {
+    font-size: .9em;
+    text-align: left;
 }
 
 @media only screen and (max-width: 900px) {
@@ -259,5 +285,11 @@ a {
     }
     .textHighlight {
         width: 95%;
+    }
+    .results {
+        font-size: 1.5em;
+    }
+    .breakdown {
+        width: 100%;
     }
 }

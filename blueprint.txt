@@ -7,7 +7,12 @@ TODO:
         -help pages for confusing questions
         -autofocus on input between questions [x]
         -Session storage?
-        -Basic result charts
+        -Basic result -- amount [x]
+        -Results overview
+            -Is it enough?
+                -Standard of living (income - savings rate).
+                -Calculate number of withdrawals -- life expectancy.
+                -safety cushion
         -Detailed result advice
             -Paywall?
     -Special advice
