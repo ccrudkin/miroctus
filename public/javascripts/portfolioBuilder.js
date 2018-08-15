@@ -8,7 +8,7 @@ const riskRate = {
     4: 'aggressive'
 }
 
-let riskNum = riskRate[userData[7]];
+let riskNum = riskRate[userData[7] - 1];
 
 document.getElementById('userProfile').innerHTML = 
     `<span class="sizeUp">Profile:</span>
