@@ -101,7 +101,7 @@ function atRetirement() {
 function throughRetirement(nestEgg) {
     let years = parseFloat(userResponses[1] - userResponses[0]);
     let retireLength = parseFloat(85 - userResponses[1]);
-    let income = parseFloat(userResponses[4] - userResponses[3] * 12);
+    let income = parseFloat(userResponses[4] * .925 - userResponses[3] * 12);
     let retireEnd = totalWithDraw(years, retireLength, nestEgg, income, riskReturn[3]);
     document.getElementById('breakdownField').innerHTML = 
         `<p class="sizeUp">Will that get you through retirement?</p>
@@ -141,17 +141,7 @@ function toPortfolio(e) {
 }
 
 function toAction(data) {
-    $.ajax({
-        url: '/portfoliobuilder',
-        type: 'GET',
-        data: data,
-        error(jqXHR, textStatus, errorThrown) {
-            console.log(errorThrown);
-        },
-        success(data, textStatus, jqXHR) {
-            console.log('Success!');
-        }
-    });
+    window.location.href = `/portfoliobuilder/${data[0]}/${data[1]}/${data[2]}/${data[3]}/${data[4]}/${data[5]}/${data[6]}/${data[7]}`;
 }
 
 const inputs = {
@@ -159,7 +149,7 @@ const inputs = {
     1: "At what age do you want to retire?",
     2: "How much would you invest initially?",
     3: "How much are you willing to save and invest per month?",
-    4: "What is a rough estimate of your annual income, after taxes?",
+    4: "What is a rough estimate of your annual income, before taxes?",
     5: "What is a rough estimate of your monthly expenses? (Bills, groceries, mortgage, etc.)",
     6: "What is a rough estimate of your liquid net worth, not including your home?",
     7: "From 1-5, how agressively would you invest? Higher is riskier, but has more growth potential."
