@@ -283,6 +283,23 @@ ul {
     text-align: left;
 }
 
+#allocationDetails {
+    align-items: center;
+    margin: 1em;
+}
+
+#allocationDetails img {
+    width: 50%;
+    margin: .25em;
+}
+
+#allocationDetails span {
+    font-size: .75em;
+    width: 100%;
+    text-align: left;
+    margin: .25em;
+}
+
 @media only screen and (max-width: 900px) {
     :root {
         --nav-width: 30%;
