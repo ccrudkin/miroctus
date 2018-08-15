@@ -34,6 +34,12 @@ body {
     width: 100%;
 }
 
+.translucentBG {
+    background: rgba(235, 245, 251, .1);
+    border-radius: 1em;
+    padding: 1em 2em;
+}
+
 .graycover {
     background: var(--bluegray-dk);
     opacity: .5;
@@ -141,6 +147,12 @@ body {
     align-items: center;
 }
 
+.flexVL {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
 .graphic {
     height: 200px;
     width: 200px;
@@ -189,6 +201,7 @@ a {
 }
 
 .inform {
+    font-size: 1.25em;
     color: var(--gray-lt);
     width: 75%;
     text-align: center;
@@ -262,7 +275,6 @@ a {
     text-align: center;
     width: 75%;
     margin: 2em 0em;
-    background: rgba(235, 245, 251, .1);
     border-radius: 1em;
     padding: .5em;
 }
