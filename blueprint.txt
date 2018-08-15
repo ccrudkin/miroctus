@@ -10,8 +10,8 @@ TODO:
         -Basic result -- amount [x]
         -Results overview
             -Is it enough?
-                -Standard of living (income - savings rate).
-                -Calculate number of withdrawals -- life expectancy.
+                -Standard of living (income - savings rate) [x]
+                -Calculate number of withdrawals -- life expectancy [x]
                 -safety cushion
         -Detailed result advice
             -Paywall?

@@ -39,35 +39,10 @@ function updateInput(q) {
     if (q >= Object.keys(inputs).length) {
         // generate results and display here
         $("#calcForm").fadeOut(400, () => {
-            let years = parseFloat(userResponses[1] - userResponses[0]);
-            let i = parseFloat(userResponses[2]);
-            let a = parseFloat(userResponses[3] * 12);
-            let r = parseFloat(riskReturn[userResponses[7]]);
-            let nestEgg = totalGrowth(years, i, a, r);
-            document.getElementById('resultsField').innerHTML = `<span>Your portfolio at retirement:</span>
-                                                                <br>
-                                                                <span class="headline">$${Math.round(nestEgg).toLocaleString()}</span>`;
-            $(".results").fadeIn();
-            // console.log(userResponses);
-            let retireLength = parseFloat(85 - userResponses[1]);
-            let income = parseFloat(userResponses[4] - userResponses[3] * 12);
-            let retireEnd = totalWithDraw(years, retireLength, nestEgg, income, riskReturn[2]);
-            document.getElementById('breakdownField').innerHTML = 
-                `<p class="sizeUp">Will that get you through retirement?</p>
-                <p>At the end of retirement, you will have:</p>
-                <span class="headline">$${Math.round(retireEnd).toLocaleString()}</span>
-                <p> 
-                <ul>
-                    This assumes that you will:
-                    <li>maintain a standard of living at the future equivalent of $${income.toLocaleString()} per year (annual income minus savings rate)</li>
-                    <li>live to be 85</li> 
-                    <li>take inflation into account over your retirement</li>
-                    <li>move your investment portfolio to a low-risk allocation in retirement</li>
-                </ul>
-                </p>`;
+            let p = atRetirement();
+            let e = throughRetirement(p);
+            toPortfolio(e);
         });
-        $(".breakdown").fadeIn();
-        $(".backgroundFade").fadeIn();
         return;
     } else {
         $('#calcInputLabel').fadeOut(250, () => {
@@ -109,12 +84,82 @@ function validateInput(input) {
     }
 }
 
+function atRetirement() {
+    let years = parseFloat(userResponses[1] - userResponses[0]);
+    let i = parseFloat(userResponses[2]);
+    let a = parseFloat(userResponses[3] * 12);
+    let r = parseFloat(riskReturn[userResponses[7]]);
+    let nestEgg = totalGrowth(years, i, a, r);
+    document.getElementById('resultsField').innerHTML = `<span>Your portfolio at retirement:</span>
+                                                        <br>
+                                                        <span class="headline">$${Math.round(nestEgg).toLocaleString()}</span>`;
+    $(".results").fadeIn();
+    // console.log(userResponses);
+    return nestEgg;
+}
+
+function throughRetirement(nestEgg) {
+    let years = parseFloat(userResponses[1] - userResponses[0]);
+    let retireLength = parseFloat(85 - userResponses[1]);
+    let income = parseFloat(userResponses[4] - userResponses[3] * 12);
+    let retireEnd = totalWithDraw(years, retireLength, nestEgg, income, riskReturn[3]);
+    document.getElementById('breakdownField').innerHTML = 
+        `<p class="sizeUp">Will that get you through retirement?</p>
+        <p>At the end of retirement, you will have:</p>
+        <span class="headline">$${Math.round(retireEnd).toLocaleString()}</span>
+        <p> 
+        <ul class="sizeDown">
+            This assumes that you will:
+            <li>maintain a standard of living at the future equivalent of $${income.toLocaleString()} per year (annual income minus savings rate)</li>
+            <li>live to be 85</li> 
+            <li>take inflation into account over your retirement</li>
+            <li>move your investment portfolio to a medium-risk allocation in retirement</li>
+        </ul>
+        </p>`;
+
+    $(".breakdown").fadeIn();
+    $(".backgroundFade").fadeIn();
+    return retireEnd;
+}
+
+function toPortfolio(e) {
+    if (e < 0) {
+        document.getElementById('toAction').innerHTML = 
+        `<p>That's not enough -- check out your summary below.</p>
+        <p>But there's good news! We can still help you revise and build a plan to meet your goals.</p>
+        <button class="buttons" id="toActionButton">Go</button>`;
+    } else {
+        document.getElementById('toAction').innerHTML = 
+        `<p>That's enough to meet your goal -- check out your summary below.</p>
+        <p>Are you ready to make it happen? We can help you build your portfolio.</p>
+        <button class="buttons" id="toActionButton">Go</button>`;
+    }
+    $('#toAction').fadeIn();
+    document.getElementById('toActionButton').addEventListener('click', () => {
+        toAction(userResponses);
+    });
+}
+
+function toAction(data) {
+    $.ajax({
+        url: '/portfoliobuilder',
+        type: 'GET',
+        data: data,
+        error(jqXHR, textStatus, errorThrown) {
+            console.log(errorThrown);
+        },
+        success(data, textStatus, jqXHR) {
+            console.log('Success!');
+        }
+    });
+}
+
 const inputs = {
     0: "Enter your current age:",
     1: "At what age do you want to retire?",
     2: "How much would you invest initially?",
     3: "How much are you willing to save and invest per month?",
-    4: "What is a rough estimate of your annual income?",
+    4: "What is a rough estimate of your annual income, after taxes?",
     5: "What is a rough estimate of your monthly expenses? (Bills, groceries, mortgage, etc.)",
     6: "What is a rough estimate of your liquid net worth, not including your home?",
     7: "From 1-5, how agressively would you invest? Higher is riskier, but has more growth potential."
