@@ -170,3 +170,19 @@ const reprompts = {
 };
 
 let userResponses = {};
+
+document.getElementById('calcInput').addEventListener('keyup', (event) => {
+    let code = event.keyCode;
+    console.log(`keyCode: ${code}`);
+    if (code != 13 && code != 8 && code != 46) { // 'return' and 'backspace' and 'delete'
+        inputFormat();
+    }
+});
+
+function inputFormat() {
+    let input = document.getElementById('calcInput').value;
+    let re = /[,]+/g;
+    input = input.replace(re, ''); // search for any $ or , and remove
+    input = `${parseFloat(input).toLocaleString()}`;
+    document.getElementById('calcInput').value = input;
+}
