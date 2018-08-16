@@ -30,8 +30,8 @@ body {
 }
 
 .mast {
-    font-size: .55em;
     width: 100%;
+    margin-bottom: 1em;
 }
 
 .translucentBG {
@@ -131,7 +131,7 @@ body {
 
 .main {
     width: 100%;
-    padding: 2em;
+    padding: 1em;
     max-width: 1200px;
     margin: auto;
 }
@@ -181,6 +181,10 @@ a {
     font-size: 1.5em;
 }
 
+.sizeUpUp {
+    font-size: 2em;
+}
+
 .sizeDown {
     font-size: .75em;
 }
@@ -191,14 +195,14 @@ a {
 
 .greeting {
     color: var(--gray-lt);
-    font-size: 8em;
+    font-size: 6em;
     font-weight: 700;
     font-family: "Raleway", sans-serif;
 }
 
 .headline {
     color: var(--gray-lt);
-    font-size: 2em;
+    font-size: 1.5em;
     width: 100%;
     text-align: center;
     overflow: hidden;
@@ -209,7 +213,7 @@ a {
     color: var(--gray-lt);
     width: 75%;
     text-align: center;
-    margin: 2em 0em;
+    margin: 1em 0em;
 }
 
 .textHighlight {
@@ -288,6 +292,7 @@ ul {
 }
 
 #allocationDetails {
+    width: 100%;
     align-items: center;
     margin: 1em;
 }
@@ -302,6 +307,7 @@ ul {
     width: 100%;
     text-align: left;
     margin: .25em .5em;
+    padding: 0em .25em;
 }
 
 @media only screen and (max-width: 900px) {
@@ -343,13 +349,16 @@ ul {
     .textHighlight {
         width: 95%;
     }
-    .results {
-        font-size: 1.5em;
-    }
     .breakdown {
         width: 100%;
     }
-    .inform {
-        font-size: 1em;
+    .translucentBG {
+        padding: .75em .75em;
+    }
+    .headline {
+        font-size: 1.25em;
+    }
+    .results {
+        font-size: 1.5em;
     }
 }

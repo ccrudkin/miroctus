@@ -92,7 +92,7 @@ function atRetirement() {
     let nestEgg = totalGrowth(years, i, a, r);
     document.getElementById('resultsField').innerHTML = `<span>Your portfolio at retirement:</span>
                                                         <br>
-                                                        <span class="headline">$${Math.round(nestEgg).toLocaleString()}</span>`;
+                                                        <span class="sizeUpUp">$${Math.round(nestEgg).toLocaleString()}</span>`;
     $(".results").fadeIn();
     // console.log(userResponses);
     return nestEgg;
@@ -105,9 +105,9 @@ function throughRetirement(nestEgg) {
     let income = parseFloat(salary * .925 - userResponses[3] * 12);
     let retireEnd = totalWithDraw(years, retireLength, nestEgg, salary, income, riskReturn[3]);
     document.getElementById('breakdownField').innerHTML = 
-        `<p class="sizeUp">Will that get you through retirement?</p>
+        `<p class="headline">Will that get you through retirement?</p>
         <p>At the end of retirement, you will have:</p>
-        <span class="headline">$${Math.round(retireEnd).toLocaleString()}</span>
+        <span class="sizeUp">$${Math.round(retireEnd).toLocaleString()}</span>
         <p> 
         <ul class="sizeDown">
             This assumes that you will:
@@ -173,8 +173,8 @@ let userResponses = {};
 
 document.getElementById('calcInput').addEventListener('keyup', (event) => {
     let code = event.keyCode;
-    console.log(code);
-    if (code != 13 && code != 8 && code != 46) { // 'return' and 'backspace' and 'delete'
+    // console.log(code);
+    if (code != 13) { // 'return'
         inputFormat();
     }
 });
