@@ -136,6 +136,10 @@ body {
     margin: auto;
 }
 
+.container {
+    width: 100%;
+}
+
 .flexH {
     display: flex;
     justify-content: center;
@@ -294,15 +298,29 @@ ul {
 }
 
 #allocationDetails span {
-    font-size: .75em;
+    font-size: .9em;
     width: 100%;
     text-align: left;
-    margin: .25em;
+    margin: .25em .5em;
 }
 
 @media only screen and (max-width: 900px) {
     :root {
         --nav-width: 30%;
+    }
+    #allocationDetails {
+        flex-direction: column;
+        align-items: center;
+    }
+    #allocationDetails img {
+        width: 95%;
+        margin: .25em;
+    }
+    .headline {
+        font-size: 1.5em;
+    }
+    .inform {
+        width: 95%;
     }
 }
 
@@ -330,5 +348,8 @@ ul {
     }
     .breakdown {
         width: 100%;
+    }
+    .inform {
+        font-size: 1em;
     }
 }

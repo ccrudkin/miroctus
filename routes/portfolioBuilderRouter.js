@@ -4,7 +4,7 @@ var portfolios = require('./routes_data/portfolio_profiles');
 
 // GET portfolio builder page
 router.get('/', function(req, res) {
-    res.render('portfoliobuilder', { title: 'Build portfolio - Miroctus' });
+    res.render('portfoliobuilder', { title: 'Build portfolio - Miroctus', headline: 'See your financial future.' });
 });
 
 router.get('/:portfolio', function(req, res) {

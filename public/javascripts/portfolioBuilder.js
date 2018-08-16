@@ -30,10 +30,10 @@ function recommendations() {
         },
         success(data, textStatus, jqXHR) {
             document.getElementById('allocationChart').innerHTML = 
-            `<div class="sizeUp">${riskNum.slice(0, 1).toUpperCase() + riskNum.slice(1)} Portfolio</div>
+            `<div class="headline">${riskNum.slice(0, 1).toUpperCase() + riskNum.slice(1)} Portfolio</div>
             <div class="flexH" id="allocationDetails">
                 <img src="/images/charts/${riskNum}.png" alt="${riskNum} allocation chart">
-                <span class="sizeDown flexV" id="allocationDetails">
+                <span class="flexV">
                     <span>${data.cash}</span>
                     <span>${data.stb}</span>
                     <span>${data.itb}</span>
