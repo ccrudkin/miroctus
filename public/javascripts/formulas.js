@@ -32,13 +32,40 @@ function withDraw(p, w, r) { // portfolio value, withdrawal rate, growth rate
     return yearEnd;
 }
 
-function totalWithDraw(iyears, ryears, p, w, r) {
+function totalWithDraw(iyears, ryears, p, salary, w, r) {
     console.log(`Years of retirement: ${ryears}\nPortfolio size: ${p}\nWithdrawal rate: ${w}\nGrowth rate: ${r}`);
     for (let j = 0; j < ryears; j++) {
         console.log(`Year ${j} starting amount: $${p}`); // debugging
         let wAdjusted = w * (1 + inflation) ** (j + iyears);
-        console.log(`Year ${j} adjusted withdrawal: $${wAdjusted}`); // debugging
+        wAdjusted -= SSben(85 - ryears, j, salary);
+        console.log(`Year ${j} adjusted withdrawal (with SS): $${wAdjusted}`); // debugging
         p = withDraw(p, wAdjusted, r);
     }
     return p;
+}
+
+function SSben(retirementAge, retirementYear, salary) {
+    let bendPoints = [ 895, 5397 ];
+    let aime = salary / 12;
+    let pia;
+    if (aime <= bendPoints[0]) {
+        pia = aime * .9;
+    } else if (aime > bendPoints[0] && aime <= bendPoints[1]) {
+        pia = (bendPoints[0] * .9) + (aime - bendPoints[0]) * .32;
+    } else if (aime > bendPoints[1]) {
+        pia = (bendPoints[0] * .9) + ((bendPoints[1] - bendPoints[0]) * .32) + (aime - bendPoints[1]) * .15;
+    }
+    console.log(`Unadjusted PIA: ${pia}`); // debugging
+    if (retirementAge < 67 && retirementAge >= 64) {
+        pia = pia * (1 - (.0667 * (67 - retirementAge)));
+    } else if (retirementAge < 64) {
+        pia = pia * (1 - ((.0667 * 3) + (.05 * (64 - retirementAge))));
+    } else if (retirementAge > 67 && retirementAge <= 70) {
+        pia = pia * (1 + (retirementAge - 67) * .08);
+    } else if (retirementAge > 70) {
+        pia = pia * (1 + 3 * .08);
+    }
+    console.log(`Adjusted PIA: ${pia}`); // debugging
+    console.log(`Adjusted PIA with inflation: ${pia * (1 + inflation) ** retirementYear}`)
+    return (pia * 12) * (1 + inflation) ** retirementYear;
 }

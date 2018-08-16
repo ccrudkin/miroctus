@@ -101,8 +101,9 @@ function atRetirement() {
 function throughRetirement(nestEgg) {
     let years = parseFloat(userResponses[1] - userResponses[0]);
     let retireLength = parseFloat(85 - userResponses[1]);
-    let income = parseFloat(userResponses[4] * .925 - userResponses[3] * 12);
-    let retireEnd = totalWithDraw(years, retireLength, nestEgg, income, riskReturn[3]);
+    let salary = parseFloat(userResponses[4]);
+    let income = parseFloat(salary * .925 - userResponses[3] * 12);
+    let retireEnd = totalWithDraw(years, retireLength, nestEgg, salary, income, riskReturn[3]);
     document.getElementById('breakdownField').innerHTML = 
         `<p class="sizeUp">Will that get you through retirement?</p>
         <p>At the end of retirement, you will have:</p>
