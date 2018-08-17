@@ -45,7 +45,7 @@ function totalWithDraw(iyears, ryears, p, salary, w, r) {
 }
 
 function SSben(retirementAge, retirementYear, salary) {
-    let bendPoints = [ 895, 5397 ];
+    let bendPoints = [ 895, 5397 ]; // bend points change yearly, so can only estimate
     let aime = salary / 12;
     let pia;
     if (aime <= bendPoints[0]) {

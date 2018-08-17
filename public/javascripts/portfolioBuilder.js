@@ -37,6 +37,7 @@ function recommendations() {
                     <canvas class='chart' id="chart" width="300" height="300"></canvas>
                 </div>
                 <span class="flexV">
+                    <span style="font-size: 1.15em";>Historical return: ${data.return * 100}% annually</span> 
                     <span>${data.cash[0]}</span>
                     <span>${data.stb[0]}</span>
                     <span>${data.itb[0]}</span>

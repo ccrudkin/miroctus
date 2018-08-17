@@ -10,7 +10,8 @@ const portfolios = {
         'scs': [ 'Small Cap Stocks: 4%', 'Small Cap Stocks', .04 ],
         'ids': [ 'International Developed Stocks: 5%', "Int'l. Developed Stocks", .05 ],
         'ies': [ 'International Emerging Stocks: 0%', "Int'l. Emerging Stocks", 0 ],
-        'name': 'Conservative'
+        'name': 'Conservative',
+        'return': .0451
     },
     'moderately_conservative': {
         'cash': [ 'Cash: 4%', 'Cash', .04 ],
@@ -23,7 +24,8 @@ const portfolios = {
         'scs': [ 'Small Cap Stocks: 5%', 'Small Cap Stocks', .05 ],
         'ids': [ 'International Developed Stocks: 9%', "Int'l. Developed Stocks", .09 ],
         'ies': [ 'International Emerging Stocks: 0%', "Int'l. Emerging Stocks", 0 ],
-        'name': 'Moderately Conservative'
+        'name': 'Moderately Conservative',
+        'return': .0596
     },
     'moderate': {
         'cash': [ 'Cash: 4%', 'Cash', .04 ],
@@ -36,7 +38,8 @@ const portfolios = {
         'scs': [ 'Small Cap Stocks: 8%', 'Small Cap Stocks', .08 ],
         'ids': [ 'International Developed Stocks: 10%', "Int'l. Developed Stocks", .1 ],
         'ies': [ 'International Emerging Stocks: 0%', "Int'l. Emerging Stocks", 0 ],
-        'name': 'Moderate'
+        'name': 'Moderate',
+        'return': .0886
     },
     'moderately_aggressive': {
         'cash': [ 'Cash: 2%', 'Cash', .02 ],
@@ -49,7 +52,8 @@ const portfolios = {
         'scs': [ 'Small Cap Stocks: 13%', 'Small Cap Stocks', .13 ],
         'ids': [ 'International Developed Stocks: 12%', "Int'l. Developed Stocks", .12 ],
         'ies': [ 'International Emerging Stocks: 6%', "Int'l. Emerging Stocks", .06 ],
-        'name': 'Moderately Aggressive'
+        'name': 'Moderately Aggressive',
+        'return': .0981
     },
     'aggressive': {
         'cash': [ 'Cash: 0%', 'Cash', 0 ],
@@ -62,7 +66,8 @@ const portfolios = {
         'scs': [ 'Small Cap Stocks: 14%', 'Small Cap Stocks', .14 ],
         'ids': [ 'International Developed Stocks: 17%', "Int'l. Developed Stocks", .17 ],
         'ies': [ 'International Emerging Stocks: 8%', "Int'l. Emerging Stocks", .08 ],
-        'name': 'Aggressive'
+        'name': 'Aggressive',
+        'return': .1048
     }
 }
 

@@ -131,6 +131,7 @@ body {
 
 .main {
     width: 100%;
+    min-width: 380px;
     padding: 1em;
     max-width: 1200px;
     margin: auto;
@@ -250,8 +251,9 @@ a {
     text-align: center;
 }
 
-#calcInputLabel {
+#calcInputLabelContainer {
     height: 3em;
+    justify-content: flex-end;
 }
 
 .interactiveField {

@@ -45,11 +45,16 @@ function drawChart(data) {
         },
         options: {
             legend: {
+                display: false,
                 labels: {
                     boxWidth: 10,
                     fontSize: 10
                 },
                 position: 'bottom'
+            },
+            title: {
+                display: true,
+                text: `${data.name} Portfolio`
             }
         }
     });
