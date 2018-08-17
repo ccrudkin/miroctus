@@ -32,20 +32,24 @@ function recommendations() {
             document.getElementById('allocationChart').innerHTML = 
             `<div class="headline">${data.name} Portfolio</div>
             <div class="flexH" id="allocationDetails">
-                <img src="/images/charts/${riskNum}.png" alt="${riskNum} allocation chart">
+                <!-- <img src="/images/charts/${riskNum}.png" alt="${riskNum} allocation chart"> -->
+                <div>
+                    <canvas class='chart' id="chart" width="250" height="250"></canvas>
+                </div>
                 <span class="flexV">
-                    <span>${data.cash}</span>
-                    <span>${data.stb}</span>
-                    <span>${data.itb}</span>
-                    <span>${data.ltb}</span>
-                    <span>${data.lcvs}</span>
-                    <span>${data.lcgs}</span>
-                    <span>${data.mcs}</span>
-                    <span>${data.scs}</span>
-                    <span>${data.ids}</span>
-                    <span>${data.ies}</span>
+                    <span>${data.cash[0]}</span>
+                    <span>${data.stb[0]}</span>
+                    <span>${data.itb[0]}</span>
+                    <span>${data.ltb[0]}</span>
+                    <span>${data.lcvs[0]}</span>
+                    <span>${data.lcgs[0]}</span>
+                    <span>${data.mcs[0]}</span>
+                    <span>${data.scs[0]}</span>
+                    <span>${data.ids[0]}</span>
+                    <span>${data.ies[0]}</span>
                 </span>
             </div>`;
+            drawChart(data);
         }
     });
 }
