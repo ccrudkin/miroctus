@@ -33,8 +33,8 @@ function recommendations() {
             `<div class="headline">${data.name} Portfolio</div>
             <div class="flexH" id="allocationDetails">
                 <!-- <img src="/images/charts/${riskNum}.png" alt="${riskNum} allocation chart"> -->
-                <div>
-                    <canvas class='chart' id="chart" width="250" height="250"></canvas>
+                <div class="chartContainer">
+                    <canvas class='chart' id="chart" width="300" height="300"></canvas>
                 </div>
                 <span class="flexV">
                     <span>${data.cash[0]}</span>

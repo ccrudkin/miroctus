@@ -115,6 +115,7 @@ function throughRetirement(nestEgg) {
             <li>live to be 85</li> 
             <li>take inflation into account over your retirement</li>
             <li>move your investment portfolio to a medium-risk allocation in retirement</li>
+            <li>collect Social Security at the rate calculated from your current income</li>
         </ul>
         </p>`;
 

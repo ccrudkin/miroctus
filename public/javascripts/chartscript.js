@@ -42,6 +42,15 @@ function drawChart(data) {
                 data.ids[1],
                 data.ies[1]
             ]
+        },
+        options: {
+            legend: {
+                labels: {
+                    boxWidth: 10,
+                    fontSize: 10
+                },
+                position: 'bottom'
+            }
         }
     });
 }
