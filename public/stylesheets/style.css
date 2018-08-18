@@ -293,6 +293,10 @@ ul {
     text-align: left;
 }
 
+#userProfile span {
+    text-align: left;
+}
+
 #allocationDetails {
     width: 100%;
     align-items: center;
