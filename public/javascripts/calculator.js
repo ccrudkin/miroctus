@@ -104,6 +104,7 @@ function throughRetirement(nestEgg) {
     let salary = parseFloat(userResponses[4]);
     let income = parseFloat(salary * .925 - userResponses[3] * 12);
     let retireEnd = totalWithDraw(years, retireLength, nestEgg, salary, income, riskReturn[3]);
+    userResponses.ssBen = SSben(userResponses[1], 0, salary);
     document.getElementById('breakdownField').innerHTML = 
         `<p class="headline">Will that get you through retirement?</p>
         <p>At the end of retirement, you will have:</p>

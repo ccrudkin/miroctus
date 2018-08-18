@@ -1,4 +1,7 @@
 TODO:
+-Refine CSS classes
+-refactor bloated calculator.js script
+-if != sessionStorage, go back to calculator start
 
 -Minimum viable product.
     -Calculator
@@ -12,11 +15,16 @@ TODO:
                 -Calculate number of withdrawals -- life expectancy [x]
                 -incorporate social security [x]
                 -charts [x]
-                -display social security estimated withdrawal
+                -display social security estimated withdrawal [x]
+                -bar chart with total portfolio value
         -Detailed result advice
             -account required
                 -database
                 -hashed passwords
+            -Profile and portfolio
+                -add "standard of living" amount
+                -add SS benefit amount
+                -generate a detailed report (less 'pretty,' more text and info)
     -Special advice
     -Learning page with resources
 

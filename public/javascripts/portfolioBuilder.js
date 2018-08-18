@@ -19,7 +19,8 @@ document.getElementById('userProfile').innerHTML =
     <span>Annual income: $${parseFloat(userData[4]).toLocaleString()}</span>
     <span>Monthly expenses: $${parseFloat(userData[5]).toLocaleString()}</span>
     <span>Net worth: $${parseFloat(userData[6]).toLocaleString()}</span>
-    <span>Risk willingness: ${userData[7]}</span>`;
+    <span>Risk willingness: ${userData[7]}</span>
+    <span>Annual Social Security benefit: $${Math.round(userData.ssBen).toLocaleString()}</span>`;
 
 function recommendations() {
     $.ajax({
