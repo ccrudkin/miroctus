@@ -55,7 +55,19 @@ function drawChart(data) {
             title: {
                 display: true,
                 text: `${data.name} Portfolio`
-            }
+            },
+            tooltips: {
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                        let dataset = data.datasets[tooltipItem.datasetIndex];
+                        // console.log(dataset);
+                        let currentValue = dataset.data[tooltipItem.index];
+                        let percentage = currentValue * 100;
+                        let labelText = dataset._meta[1].data[tooltipItem.index]._model.label;
+                        return `${labelText}: ${percentage}%`;
+                    }
+                }
+            } 
         }
     });
 }
@@ -63,7 +75,7 @@ function drawChart(data) {
 function drawGrowthBar(age, data) {
     var ctx = document.getElementById("growthChart");
 
-    console.log(data);
+    // console.log(data);
     let labels = []; 
     for (let i = 0; i < data.length; i++) {
         labels.push(i + parseInt(age));
