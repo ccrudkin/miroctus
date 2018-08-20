@@ -18,13 +18,15 @@ function totalGrowth(years, i, a, r) {
                 `Initial investment: ${i}\n` +
                 `Annual additions: ${a}\n` +
                 `Growth rate: ${r}`); // debugging
+    let annualAmounts = [];
     for (let j = 0; j < years; j++) {
         // console.log(`Year ${j} start -- Total: $${i}`); // debugging
         let aAdjusted = a * (1 + inflation) ** (j + 1);
         // console.log(`Adjusted addition for year ${j}: ${aAdjusted}`); // debugging
         i = annualGrowth(i, aAdjusted, r);
+        annualAmounts.push(Math.round(i));
     }
-    return i;
+    return { 'totalGrowth': i, 'annualAmounts': annualAmounts };
 }
 
 function withDraw(p, w, r) { // portfolio value, withdrawal rate, growth rate
@@ -34,14 +36,16 @@ function withDraw(p, w, r) { // portfolio value, withdrawal rate, growth rate
 
 function totalWithDraw(iyears, ryears, p, salary, w, r) {
     console.log(`Years of retirement: ${ryears}\nPortfolio size: ${p}\nWithdrawal rate: ${w}\nGrowth rate: ${r}`);
+    let annualAmounts = [];
     for (let j = 0; j < ryears; j++) {
         console.log(`Year ${j} starting amount: $${p}`); // debugging
         let wAdjusted = w * (1 + inflation) ** (j + iyears);
         wAdjusted -= SSben(85 - ryears, j, salary);
         console.log(`Year ${j} adjusted withdrawal (with SS): $${wAdjusted}`); // debugging
         p = withDraw(p, wAdjusted, r);
+        annualAmounts.push(Math.round(p));
     }
-    return p;
+    return { "totalWithDraw": p, "annualAmounts": annualAmounts };
 }
 
 function SSben(retirementAge, retirementYear, salary) {

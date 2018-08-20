@@ -16,7 +16,7 @@ TODO:
                 -incorporate social security [x]
                 -charts [x]
                 -display social security estimated withdrawal [x]
-                -bar chart with total portfolio value
+                -line chart with total portfolio value [x]
         -Detailed result advice
             -account required
                 -database

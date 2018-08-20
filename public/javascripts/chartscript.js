@@ -60,3 +60,69 @@ function drawChart(data) {
     });
 }
 
+function drawGrowthBar(age, data) {
+    var ctx = document.getElementById("growthChart");
+
+    console.log(data);
+    let labels = []; 
+    for (let i = 0; i < data.length; i++) {
+        labels.push(i + parseInt(age) + 1);
+    }
+
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: data,
+                backgroundColor: [
+                    '#F8C471'
+                ],
+                label: [
+                    "Portfolio Value ($)"
+                ],
+                pointRadius: 0,
+                pointHitRadius: 10,
+                pointBackgroundColor: '#E59866'
+            }]
+        },
+        options: {
+            legend: {
+                display: true,
+                labels: {
+                    boxWidth: 10,
+                    fontSize: 10
+                }
+            },
+            title: {
+                display: true,
+                text: 'Projected Portfolio Value'
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        maxTicksLimit: 10
+                    },
+                    scaleLabel: {
+                        labelString: 'Age',
+                        display: true
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        callback: function(value, index, values) {
+                            return '$' + value.toLocaleString();
+                        }
+                    }
+                }]
+            },
+            tooltips: {
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                        return data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toLocaleString();
+                    }
+                }
+            } 
+        }
+    });
+}

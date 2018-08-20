@@ -89,7 +89,7 @@ function atRetirement() {
     let i = parseFloat(userResponses[2]);
     let a = parseFloat(userResponses[3] * 12);
     let r = parseFloat(riskReturn[userResponses[7]]);
-    let nestEgg = totalGrowth(years, i, a, r);
+    let nestEgg = totalGrowth(years, i, a, r).totalGrowth;
     document.getElementById('resultsField').innerHTML = `<span>Your portfolio at retirement:</span>
                                                         <br>
                                                         <span class="sizeUpUp">$${Math.round(nestEgg).toLocaleString()}</span>`;
@@ -103,12 +103,12 @@ function throughRetirement(nestEgg) {
     let retireLength = parseFloat(85 - userResponses[1]);
     let salary = parseFloat(userResponses[4]);
     let income = parseFloat(salary * .925 - userResponses[3] * 12);
-    let retireEnd = totalWithDraw(years, retireLength, nestEgg, salary, income, riskReturn[3]);
+    let retireEnd = totalWithDraw(years, retireLength, nestEgg, salary, income, riskReturn[3]).totalWithDraw;
     userResponses.ssBen = SSben(userResponses[1], 0, salary);
     document.getElementById('breakdownField').innerHTML = 
         `<p class="headline">Will that get you through retirement?</p>
         <p>At the end of retirement, you will have:</p>
-        <span class="sizeUp">$${Math.round(retireEnd).toLocaleString()}</span>
+        <span class="sizeUp">$${Math.round(parseFloat(retireEnd)).toLocaleString()}</span>
         <p> 
         <ul class="sizeDown">
             This assumes that you will:

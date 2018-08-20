@@ -3,6 +3,11 @@
         <% include mastHead %>
         <div class="container flexV">
             <div class="inform flexVL translucentBG" id="userProfile"></div>
+            <div class="inform translucentBG" id="portfolioBar">
+                <div class="chartContainer">
+                    <canvas class="chart" id="growthChart" width="300" height="200"></canvas>
+                </div>
+            </div>
             <div class="inform translucentBG">
                 <div class="flexV" id="allocationChart"></div>
             </div>
@@ -10,5 +15,7 @@
     </div>
     <script src="/javascripts/chartscript.js"></script>
     <script src="/javascripts/portfolioBuilder.js"></script>
+    <script src="/javascripts/formulas.js"></script>
+    <script src="/javascripts/portfolioBar.js"></script>
 
 <% include footer %>
