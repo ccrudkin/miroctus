@@ -66,7 +66,7 @@ function drawGrowthBar(age, data) {
     console.log(data);
     let labels = []; 
     for (let i = 0; i < data.length; i++) {
-        labels.push(i + parseInt(age) + 1);
+        labels.push(i + parseInt(age));
     }
 
     var myChart = new Chart(ctx, {

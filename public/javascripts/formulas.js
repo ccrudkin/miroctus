@@ -18,7 +18,7 @@ function totalGrowth(years, i, a, r) {
                 `Initial investment: ${i}\n` +
                 `Annual additions: ${a}\n` +
                 `Growth rate: ${r}`); // debugging
-    let annualAmounts = [];
+    let annualAmounts = [i];
     for (let j = 0; j < years; j++) {
         // console.log(`Year ${j} start -- Total: $${i}`); // debugging
         let aAdjusted = a * (1 + inflation) ** (j + 1);
