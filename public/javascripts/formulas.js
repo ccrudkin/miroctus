@@ -37,15 +37,17 @@ function withDraw(p, w, r) { // portfolio value, withdrawal rate, growth rate
 function totalWithDraw(iyears, ryears, p, salary, w, r) {
     console.log(`Years of retirement: ${ryears}\nPortfolio size: ${p}\nWithdrawal rate: ${w}\nGrowth rate: ${r}`);
     let annualAmounts = [];
+    let withDrawAmounts = [];
     for (let j = 0; j < ryears; j++) {
         console.log(`Year ${j} starting amount: $${p}`); // debugging
         let wAdjusted = w * (1 + inflation) ** (j + iyears);
+        withDrawAmounts.push(Math.round(wAdjusted));
         wAdjusted -= SSben(85 - ryears, j, salary);
         console.log(`Year ${j} adjusted withdrawal (with SS): $${wAdjusted}`); // debugging
         p = withDraw(p, wAdjusted, r);
         annualAmounts.push(Math.round(p));
     }
-    return { "totalWithDraw": p, "annualAmounts": annualAmounts };
+    return { "totalWithDraw": p, "annualAmounts": annualAmounts, "withDrawAmounts": withDrawAmounts };
 }
 
 function SSben(retirementAge, retirementYear, salary) {

@@ -8,7 +8,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/:portfolio', function(req, res) {
-    console.log(portfolios[req.params.portfolio])
+    // console.log(portfolios[req.params.portfolio])
     res.send(portfolios[req.params.portfolio]);
 });
 

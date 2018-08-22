@@ -103,7 +103,8 @@ function throughRetirement(nestEgg) {
     let retireLength = parseFloat(85 - userResponses[1]);
     let salary = parseFloat(userResponses[4]);
     let income = parseFloat(salary * .925 - userResponses[3] * 12);
-    let retireEnd = totalWithDraw(years, retireLength, nestEgg, salary, income, riskReturn[3]).totalWithDraw;
+    let withdraws = totalWithDraw(years, retireLength, nestEgg, salary, income, riskReturn[3]);
+    let retireEnd = withdraws.totalWithDraw;
     userResponses.ssBen = SSben(userResponses[1], 0, salary);
     document.getElementById('breakdownField').innerHTML = 
         `<p class="headline">Will that get you through retirement?</p>
@@ -112,7 +113,7 @@ function throughRetirement(nestEgg) {
         <p> 
         <ul class="sizeDown">
             This assumes that you will:
-            <li>maintain a standard of living at the future equivalent of $${income.toLocaleString()} per year (annual income minus savings rate and 7.65% payroll tax)</li>
+            <li>maintain your current standard of living relative to inflation, equal to $${withdraws.withDrawAmounts[0].toLocaleString()} in your first year of retirement</li>
             <li>live to be 85</li> 
             <li>take inflation into account over your retirement</li>
             <li>move your investment portfolio to a medium-risk allocation in retirement</li>
