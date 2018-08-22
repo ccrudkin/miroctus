@@ -88,7 +88,7 @@ function drawGrowthBar(age, data) {
             datasets: [{
                 data: data,
                 backgroundColor: [
-                    '#F8C471'
+                    'rgba(248, 196, 113, .8)'
                 ],
                 label: [
                     "Portfolio Value ($)"
