@@ -29,6 +29,16 @@ TODO:
     -Special advice
     -Learning page with resources
 
+Account:
+    -sign-up page after calculator results overview, before portfolio details
+        -name, email, birthdate, other basic demographic info
+            -validation
+        -verified form info > connect to DB > create user profile > hash password
+        -user agreement / information use? GDPR concerns?
+    -logged in/out status via sessions with page permissions
+        -basic calculator and 'Help' page access when logged out
+        -portfolio access and persistent data when logged in
+    -allow to edit user info when logged in
 
 
 
@@ -39,6 +49,6 @@ SITE MAP:
 |-Calculator
     |-Special advice and tools
     |-Basic results
-    |-Detailed results (Paywall?)
+    |-Detailed results (gated content)
 |-Learning/resources
 |-Contact

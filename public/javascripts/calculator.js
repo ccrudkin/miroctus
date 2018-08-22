@@ -6,6 +6,7 @@ $(document).ready(() => {
     });
 });
 
+// get and validate input, pass into updateinput function
 function inputHandler() {
     let q = 0;
     document.getElementById('calcInputButton').addEventListener('click', () => {
@@ -35,6 +36,7 @@ function inputHandler() {
     });
 }
 
+// update user input object and fade to next question; or finalize data profile if at end
 function updateInput(q) {
     if (q >= Object.keys(inputs).length) {
         // generate results and display here
@@ -84,6 +86,7 @@ function validateInput(input) {
     }
 }
 
+// calculate value of portfolio at retirement age
 function atRetirement() {
     let years = parseFloat(userResponses[1] - userResponses[0]);
     let i = parseFloat(userResponses[2]);
@@ -98,6 +101,10 @@ function atRetirement() {
     return nestEgg;
 }
 
+
+// calculate withdrawals and annual value of portfolio through retirement
+// 'nestEgg' input is total value of portfolio at year 0 of retirement
+// function also updates HTML and displays basic portfolio info
 function throughRetirement(nestEgg) {
     let years = parseFloat(userResponses[1] - userResponses[0]);
     let retireLength = parseFloat(85 - userResponses[1]);
@@ -126,6 +133,9 @@ function throughRetirement(nestEgg) {
     return retireEnd;
 }
 
+// display basic portfolio info and display messaging: amount, enough vs. not enough
+// call next function
+// display button to create profile and see detailed results
 function toPortfolio(e) {
     if (e < 0) {
         document.getElementById('toAction').innerHTML = 
@@ -144,12 +154,14 @@ function toPortfolio(e) {
     });
 }
 
+// commit user input object into session storage data as JSON string
+// open new page -- account registration
 function toAction(data) {
     sessionStorage.setItem('investmentProfile', JSON.stringify(data));
     window.location.href = `/portfoliobuilder`
-    // ${data[0]}/${data[1]}/${data[2]}/${data[3]}/${data[4]}/${data[5]}/${data[6]}/${data[7]}`;
 }
 
+// questions
 const inputs = {
     0: "Enter your current age:",
     1: "At what age do you want to retire?",
@@ -158,18 +170,19 @@ const inputs = {
     4: "What is a rough estimate of your annual income, before taxes?",
     5: "What is a rough estimate of your monthly expenses? (Bills, groceries, mortgage, etc.)",
     6: "What is a rough estimate of your liquid net worth, not including your home?",
-    7: "From 1-5, how agressively would you invest? Higher is riskier, but has more growth potential."
+    7: "On a 1-5 scale, how agressively would you invest? Higher is riskier, with more growth potential."
 };
 
+// reprompts matching their respective questions
 const reprompts = {
-    0: "Please enter a valid age.",
+    0: "Please enter a valid current age.",
     1: "Please enter a valid age of retirement.",
-    2: "Please enter a valid dollar amount.",
-    3: "Please enter a valid dollar amount.",
-    4: "Please enter a valid dollar amount.",
-    5: "Please enter a valid dollar amount.",
-    6: "Please enter a valid dollar amount.",
-    7: "Please enter a number between 1 and 5."
+    2: "Please enter a valid dollar amount for initial investment.",
+    3: "Please enter a valid dollar amount for monthly savings.",
+    4: "Please enter a valid dollar amount for annual income.",
+    5: "Please enter a valid dollar amount for monthly expenses.",
+    6: "Please enter a valid dollar amount for liquid net worth.",
+    7: "Please enter a number from 1 to 5."
 };
 
 let userResponses = {};
@@ -182,6 +195,7 @@ document.getElementById('calcInput').addEventListener('keyup', (event) => {
     }
 });
 
+// clean input, prevent non-numbers, and replace with local string formatting
 function inputFormat() {
     let input = document.getElementById('calcInput').value;
     let re = /[,]+/g;

@@ -1,3 +1,4 @@
+// historical rates of return for given portfolio profiles
 const riskReturn = {
     1: 0.0451,
     2: 0.0596,
@@ -50,6 +51,8 @@ function totalWithDraw(iyears, ryears, p, salary, w, r) {
     return { "totalWithDraw": p, "annualAmounts": annualAmounts, "withDrawAmounts": withDrawAmounts };
 }
 
+// calculate social security benefit based on retirement age, according to gov't formula
+// NOTE: bendPoints change every year; THIS WILL NEED REGULAR UPDATING
 function SSben(retirementAge, retirementYear, salary) {
     let bendPoints = [ 895, 5397 ]; // bend points change yearly, so can only estimate
     let aime = salary / 12;
