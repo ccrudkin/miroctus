@@ -30,6 +30,9 @@ TODO:
     -Learning page with resources
 
 Account:
+    -intake info
+        -validate info
+        -clean info / numbers
     -sign-up page after calculator results overview, before portfolio details
         -name, email, birthdate, other basic demographic info
             -validation

@@ -12,6 +12,7 @@
     --gray-lt: #EBF5FB;
     --bluegray-dk: #566573;
     --bluegray-lt: #95A5A6;
+    --gray-dk: #424949;
     --nav-width: 20%;
     --nav-left: -60%;
 }
@@ -234,7 +235,7 @@ a {
     border: 2px solid var(--gray-lt);
     border-radius: .25em;
     padding: .15em .75em;
-    margin: .5em;
+    margin: .5em 0em;
 }
 
 .buttons:hover {
@@ -320,6 +321,28 @@ ul {
     background-color: var(--gray-lt);
     border-radius: 1em;
     padding: .5em;
+}
+
+.formLabel {
+    font-size: 1.15em;
+    color: var(--gray-lt);
+    margin-top: .25em;
+}
+
+.formInput {
+    font-size: 1.15em;
+    color: var(--gray-dk);
+    border-radius: .25em;
+    padding: .25em;
+    border: none;
+}
+
+.formSelect {
+    color: var(--gray-dk);
+    font-size: 1.15em;
+    border-radius: .25em;
+    padding: .25em;
+    border: none;   
 }
 
 @media only screen and (max-width: 900px) {

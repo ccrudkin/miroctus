@@ -139,14 +139,14 @@ function throughRetirement(nestEgg) {
 function toPortfolio(e) {
     if (e < 0) {
         document.getElementById('toAction').innerHTML = 
-        `<p>That's not enough -- check out your summary below.</p>
-        <p>But there's good news! We can still help you revise and build a plan to meet your goals.</p>
-        <button class="buttons" id="toActionButton">Go</button>`;
+        `<p>That's not enough, but we can still help you revise and build a plan to meet your goals. Check out your summary below.</p>
+        <p>Then, create a free account in one easy step and get your portfolio details.</p>
+        <button class="buttons" id="toActionButton">Sign up</button>`;
     } else {
         document.getElementById('toAction').innerHTML = 
         `<p>That's enough to meet your goal -- check out your summary below.</p>
-        <p>Are you ready to make it happen? We can help you build your portfolio.</p>
-        <button class="buttons" id="toActionButton">Go</button>`;
+        <p>Then, create a free account in one easy step and get your portfolio details.</p>
+        <button class="buttons" id="toActionButton">Sign up</button>`;
     }
     $('#toAction').fadeIn();
     document.getElementById('toActionButton').addEventListener('click', () => {
@@ -158,7 +158,7 @@ function toPortfolio(e) {
 // open new page -- account registration
 function toAction(data) {
     sessionStorage.setItem('investmentProfile', JSON.stringify(data));
-    window.location.href = `/portfoliobuilder`
+    window.location.href = `/register`;
 }
 
 // questions
