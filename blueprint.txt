@@ -32,7 +32,7 @@ TODO:
 Account:
     -intake info
         -validate info
-        -clean info / numbers
+        -clean info / numbers [x]
     -sign-up page after calculator results overview, before portfolio details
         -name, email, birthdate, other basic demographic info
             -validation

@@ -13,6 +13,8 @@
     --bluegray-dk: #566573;
     --bluegray-lt: #95A5A6;
     --gray-dk: #424949;
+    --error-color: #C0392B;
+    --error-bg: #E6B0AA;
     --nav-width: 20%;
     --nav-left: -60%;
 }
@@ -323,6 +325,11 @@ ul {
     padding: .5em;
 }
 
+.formContainer {
+    width: 75%;
+    max-width: 600px;
+}
+
 .formLabel {
     font-size: 1.15em;
     color: var(--gray-lt);
@@ -345,6 +352,14 @@ ul {
     border: none;   
 }
 
+.messages {
+    color: var(--error-color);
+    background-color: var(--error-bg);
+    border: 1px solid var(--error-color);
+    border-radius: .25em;
+    padding: .25em;
+}
+
 @media only screen and (max-width: 900px) {
     :root {
         --nav-width: 30%;
@@ -362,6 +377,9 @@ ul {
     }
     .inform {
         width: 95%;
+    }
+    .formContainer {
+        width: 85%;
     }
 }
 
@@ -395,5 +413,8 @@ ul {
     }
     .results {
         font-size: 1.5em;
+    }
+    .formContainer {
+        width: 95%;
     }
 }

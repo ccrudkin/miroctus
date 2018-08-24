@@ -41,8 +41,13 @@ function submitData() {
             return 'Error.'
         },
         success(data, textStatus, jqXHR) {
-            console.log(`Data sent to server. Msg: ${data}`);
-            window.location.href = `/`; // react based on reply error status instead?
+            console.log(`Data sent to server. Msg: ${data.msg}`);
+            if (data.status === 'success') {
+                window.location.href = `/`;
+            } else {
+                document.getElementById('registerError').innerHTML = 'Error. ' + data.msg;
+                $('#registerError').fadeIn();
+            }
         }
     });
 }

@@ -12,10 +12,9 @@ router.get('/', (req, res) => {
 router.post('/createuser', (req, res) => {
     // console.log(JSON.parse(req.body.data));
     let data = JSON.parse(req.body.data);
-    newUser(data);
-    res.send('Some stuff happened.');
-    // all the action with the DB happens here
-    // send error status?
+    newUser(data)
+    .then((msg) => { res.send({ 'status': 'success', 'msg': msg }) })
+    .catch((err) => { res.send({ 'status': 'error', 'msg': err }) });
 });
 
 // create new user -- really needs refactoring, promises, etc.
@@ -26,52 +25,56 @@ function newUser(data) {
     console.log(formData);
     console.log(sessionData);
 
-    MongoClient.connect(murl, { useNewUrlParser: true }, function(err, client) {
-        console.log('Database connection made.');
-
-        const db = client.db(dbName);
-
-        db.collection('users').find({ 'email': `${formData.email}` }).toArray((err, docs) => {
-            if (err) {
-                console.log(err);
-            } else if (docs.length > 0) {
-                console.log('Creation error - user already exists.');
-                client.close();
-                return 'User already exists.';
-            }
-            else {
-                console.log('Creating new user document.');
-
-                db.collection('users').insertOne({
-
-                    'email': `${formData.email}`,
-                    'firstName': `${formData.firstName}`,
-                    'lastName': `${formData.lastName}`,
-                    'password': `${formData.password}`,
-                    'birthYear': `${formData.birthYear}`,
-                    'annualIncome': `${formData.annualIncome}`,
-                    'netWorth': `${formData.netWorth}`,
-                    'age': `${2018 - parseInt(formData.birthYear)}`,
-                    'retireAge': `${sessionData[1]}`,
-                    'initInvest': `${sessionData[2]}`,
-                    'monthlySave': `${sessionData[3]}`,
-                    'monthlyExpenses': `${sessionData[5]}`,
-                    'riskWilling': `${sessionData[7]}`
-
-                }, (err, result) => {
-                    if (err) {
-                        console.log(err);
-                        client.close();
-                        return 'Error.';
-                    } else {
-                        console.log('Insert success.');
-                        client.close();
-                        return 'Success.'
-                    }
-                });
-            }
+    let prom = new Promise((resolve, reject) => {
+        MongoClient.connect(murl, { useNewUrlParser: true }, function(err, client) {
+            console.log('Database connection made.');
+    
+            const db = client.db(dbName);
+    
+            db.collection('users').find({ 'email': `${formData.email}` }).toArray((err, docs) => {
+                if (err) {
+                    console.log(err);
+                    reject('Database error.');
+                } else if (docs.length > 0) {
+                    console.log('Creation error - user already exists.');
+                    client.close();
+                    reject('An account is already associated with that email.');
+                }
+                else {
+                    console.log('Creating new user document.');
+    
+                    db.collection('users').insertOne({
+    
+                        'email': `${formData.email}`,
+                        'firstName': `${formData.firstName}`,
+                        'lastName': `${formData.lastName}`,
+                        'password': `${formData.password}`,
+                        'birthYear': `${formData.birthYear}`,
+                        'annualIncome': `${formData.annualIncome}`,
+                        'netWorth': `${formData.netWorth}`,
+                        'age': `${2018 - parseInt(formData.birthYear)}`,
+                        'retireAge': `${sessionData[1]}`,
+                        'initInvest': `${sessionData[2]}`,
+                        'monthlySave': `${sessionData[3]}`,
+                        'monthlyExpenses': `${sessionData[5]}`,
+                        'riskWilling': `${sessionData[7]}`
+    
+                    }, (err, result) => {
+                        if (err) {
+                            console.log(err);
+                            client.close();
+                            reject('User document creation error.');
+                        } else {
+                            console.log('Insert success.');
+                            client.close();
+                            resolve('User profile created.');
+                        }
+                    });
+                }
+            });
         });
     });
+    return prom;
 }
 
 module.exports = router;
