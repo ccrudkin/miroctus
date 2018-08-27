@@ -1,7 +1,9 @@
 TODO:
 -Refine CSS classes
 -refactor bloated calculator.js script
--if != sessionStorage, go back to calculator start
+-refresh login/out nav link after logout
+-treat calculator differently if user logged in
+
 
 -Minimum viable product.
     -Calculator

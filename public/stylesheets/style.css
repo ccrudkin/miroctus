@@ -193,6 +193,10 @@ a {
     font-size: .75em;
 }
 
+.smlBlank {
+    height: 2em;
+}
+
 .medBlank {
     height: 5em;
 }
@@ -359,6 +363,12 @@ ul {
     border-radius: .25em;
     padding: .25em;
     margin: .5em 0em;
+}
+
+.profileItem {
+    color: var(--gray-lt);
+    font-size: 1.25em;
+    padding: .25em;
 }
 
 @media only screen and (max-width: 900px) {

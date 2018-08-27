@@ -1,6 +1,3 @@
-let userData = JSON.parse(sessionStorage.getItem('investmentProfile'));
-// get this data ^^^ from database now instead
-
 const riskRate = {
     0: 'conservative',
     1: 'moderately_conservative',
@@ -9,23 +6,25 @@ const riskRate = {
     4: 'aggressive'
 }
 
-let riskNum = riskRate[userData[7] - 1];
-
-document.getElementById('userProfile').innerHTML = 
-    `<span class="sizeUp">Profile:</span>
-    <span>Age: ${userData[0]}</span>
-    <span>Retirement age: ${userData[1]}</span>
-    <span>Initial investment: $${parseFloat(userData[2]).toLocaleString()}</span>
-    <span>Monthly savings: $${parseFloat(userData[3]).toLocaleString()}</span>
-    <span>Annual income: $${parseFloat(userData[4]).toLocaleString()}</span>
-    <span>Monthly expenses: $${parseFloat(userData[5]).toLocaleString()}</span>
-    <span>Net worth: $${parseFloat(userData[6]).toLocaleString()}</span>
-    <span>Risk willingness: ${userData[7]}</span>
-    <span>Annual Social Security benefit: $${Math.round(userData.ssBen).toLocaleString()}</span>`;
-
-function recommendations() {
+function getUserData() {
     $.ajax({
-        url: `/portfoliobuilder/${riskNum}`,
+        url: '/profile/details',
+        type: 'GET',
+        error(jqXHR, textStatus, errorThrown) {
+            console.log(errorThrown);
+        },
+        success(data, textStatus, jqXHR) {
+            let riskNum = riskRate[data.riskWilling - 1];
+            recommendations(riskNum);
+            growthChart(data);
+            console.log(data);
+        }
+    });
+}
+
+function recommendations(riskNum) {
+    $.ajax({
+        url: `/profile/portfolio/${riskNum}`,
         type: 'GET',
         error(jqXHR, textStatus, errorThrown) {
             console.log(errorThrown);
@@ -57,4 +56,18 @@ function recommendations() {
     });
 }
 
-recommendations();
+let userData = getUserData();
+
+/* // populate user profile data from session; DEPRECATED
+document.getElementById('userProfile').innerHTML = 
+    `<span class="sizeUp">Profile:</span>
+    <span>Age: ${userData[0]}</span>
+    <span>Retirement age: ${userData[1]}</span>
+    <span>Initial investment: $${parseFloat(userData[2]).toLocaleString()}</span>
+    <span>Monthly savings: $${parseFloat(userData[3]).toLocaleString()}</span>
+    <span>Annual income: $${parseFloat(userData[4]).toLocaleString()}</span>
+    <span>Monthly expenses: $${parseFloat(userData[5]).toLocaleString()}</span>
+    <span>Net worth: $${parseFloat(userData[6]).toLocaleString()}</span>
+    <span>Risk willingness: ${userData[7]}</span>
+    <span>Annual Social Security benefit: $${Math.round(userData.ssBen).toLocaleString()}</span>`;
+*/

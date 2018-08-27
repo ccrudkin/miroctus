@@ -13,7 +13,7 @@ router.get('/', ensureNotAuthenticated, (req, res) => {
 });
 
 router.get('/retry', (req, res) => {
-    res.render('login', { title: 'Miroctus - Login', headline: 'See your financial future.', msg: 'Login failed. Please try again.' });
+    res.render('login', { title: 'Miroctus - Login', headline: 'See your financial future.', msg: 'Incorrect email or password. Please try again.' });
 });
 
 // config passport user/pass strategy

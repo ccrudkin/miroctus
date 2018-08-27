@@ -3,12 +3,35 @@
         <% include mastHead %>
         <div class="medBlank"></div>
         <div class="container flexV">
-            <div class="flexVL translucentBG formContainer" id="loginForm">
-                <!-- Profile info from database goes here -->
+            <div class="flexVL translucentBG formContainer" id="profile">
+                <div class="profileItem">Name: <%= data.firstName %> <%= data.lastName %></div>
+                <div class="profileItem">Email address: <%= data.email %></div>
+                <div class="profileItem">Birth year: <%= data.birthYear %></div>                
+                <div class="profileItem">Portfolio value: $<%= parseFloat(data.initInvest).toLocaleString() %></div>
+                <div class="profileItem">Retirement age goal: <%= data.retireAge %></div>
+                <div class="profileItem">Annual income: $<%= parseFloat(data.annualIncome).toLocaleString() %></div>
+                <div class="profileItem">Liquid net worth: $<%= parseFloat(data.netWorth).toLocaleString() %></div>
+                <div class="profileItem">Monthly expenses: $<%= parseFloat(data.monthlyExpenses).toLocaleString() %></div>
+                <div class="profileItem">Monthly savings: $<%= parseFloat(data.monthlySave).toLocaleString() %></div>
+                <div class="profileItem">Risk willingness (1-5): <%= data.riskWilling %></div>
+                <div class="smlBlank"></div>
+                <label for="editProfileButton" class="formLabel">Edit profile details:</label>
+                <button class="buttons" id="editProfileButton">Edit</button>
+            </div>
+            <div class="inform translucentBG" id="portfolioBar">
+                <div class="chartContainer">
+                    <canvas class="chart" id="growthChart" width="300" height="200"></canvas>
+                </div>
+            </div>
+            <div class="inform translucentBG">
+                <div class="flexV" id="allocationChart"></div>
             </div>
         </div>
         <div class="medBlank"></div>
     </div>
-    <script src="/javascripts/profile.js"></script>
+    <script src="/javascripts/chartscript.js"></script>
+    <script src="/javascripts/portfolioBar.js"></script>
+    <script src="/javascripts/portfolioBuilder.js"></script>
+    <script src="/javascripts/formulas.js"></script>
 
 <% include footer %>

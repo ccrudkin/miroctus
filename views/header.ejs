@@ -29,5 +29,19 @@
                         <span>Calculator</span>
                     </div>
                 </a>
+                <% if (!user) { %>
+                    <a href='/login' class='menuLink'>
+                        <div class='navItem' id=navLogin>
+                            <span>Login</span>
+                        </div>
+                    </a>
+                <% } %>
+                <% if (user) { %>
+                    <a href='/logout' class='menuLink'>
+                        <div class='navItem' id=navLogout>
+                            <span>Logout</span>
+                        </div>
+                    </a>
+                <% } %>
             </nav>
         </div>
