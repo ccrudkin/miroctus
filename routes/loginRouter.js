@@ -16,6 +16,10 @@ router.get('/retry', (req, res) => {
     res.render('login', { title: 'Miroctus - Login', headline: 'See your financial future.', msg: 'Incorrect email or password. Please try again.' });
 });
 
+router.get('/out', (req, res) => {
+    res.render('login', { title: 'Miroctus - Login', headline: 'See your financial future.', msg: 'You are logged out.' } );
+});
+
 // config passport user/pass strategy
 passport.use(new LocalStrategy({
         usernameField: 'userEmail' // different from default 'username'
