@@ -5,8 +5,13 @@ const murl = process.env.mongodbUrl; // from .env file -- change one place for w
 const dbName = 'miroctus';
 
 // GET registration page
-router.get('/', (req, res) => {
+router.get('/', ensureNotAuthenticated, (req, res) => {
     res.render('register', { title: 'Miroctus - Register', headline: 'See your financial future.' });
+});
+
+// GET "You're logged in already." page.
+router.get('/loggedin', ensureAuthenticated, (req, res) => {
+    res.render('loginCheck', { title: 'Miroctus', headline: 'See your financial future.' } );
 });
 
 router.post('/createuser', (req, res) => {
@@ -76,6 +81,23 @@ function newUser(data) {
         });
     });
     return prom;
+}
+
+
+function ensureNotAuthenticated(req, res, next){
+    if(req.isAuthenticated()) {
+        res.redirect('/register/loggedin');
+    } else {
+        return next();
+    }
+}
+
+function ensureAuthenticated(req, res, next){
+	if(req.isAuthenticated()) {
+		return next();
+	} else {
+		res.redirect('/logout');
+	}
 }
 
 module.exports = router;
