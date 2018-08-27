@@ -1,0 +1,20 @@
+<% include header %>
+    <div class="main flexV">
+        <% include mastHead %>
+        <div class="medBlank"></div>
+        <div class="container flexV">
+            <form action="/login" method="POST" class="flexVL translucentBG formContainer" id="loginForm">
+                <label for="userEmail" class="formLabel">User email:</label>
+                <input type="email" class="formInput" id="userEmail" name="userEmail">
+                <label for="password" class="formLabel">Password:</label>
+                <input type="password" class="formInput" id="password" name="password">
+                <input type="submit" class="buttons" id="loginButton" value="Sign in">
+            </form>
+            <% if (msg != '') { %>
+                <div class="messages" id="registerError"><%= msg %></div>
+            <% } %>
+        </div>
+        <div class="medBlank"></div>
+    </div>
+
+<% include footer %>

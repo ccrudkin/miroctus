@@ -1,4 +1,5 @@
 let userData = JSON.parse(sessionStorage.getItem('investmentProfile'));
+// get this data ^^^ from database now instead
 
 const riskRate = {
     0: 'conservative',

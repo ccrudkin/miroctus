@@ -43,7 +43,7 @@ function submitData() {
         success(data, textStatus, jqXHR) {
             console.log(`Data sent to server. Msg: ${data.msg}`);
             if (data.status === 'success') {
-                window.location.href = `/`;
+                window.location.href = `/login`;
             } else {
                 document.getElementById('registerError').innerHTML = 'Error. ' + data.msg;
                 $('#registerError').fadeIn();

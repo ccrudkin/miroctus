@@ -17,7 +17,7 @@ router.post('/createuser', (req, res) => {
     .catch((err) => { res.send({ 'status': 'error', 'msg': err }) });
 });
 
-// create new user -- really needs refactoring, promises, etc.
+// create new user
 function newUser(data) {
     let formData = data.formData;
     let sessionData = data.sessionData;
@@ -34,6 +34,7 @@ function newUser(data) {
             db.collection('users').find({ 'email': `${formData.email}` }).toArray((err, docs) => {
                 if (err) {
                     console.log(err);
+                    client.close();
                     reject('Database error.');
                 } else if (docs.length > 0) {
                     console.log('Creation error - user already exists.');

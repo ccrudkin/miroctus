@@ -237,7 +237,7 @@ a {
     border: 2px solid var(--gray-lt);
     border-radius: .25em;
     padding: .15em .75em;
-    margin: .5em 0em;
+    margin: .75em 0em;
 }
 
 .buttons:hover {
@@ -358,6 +358,7 @@ ul {
     border: 1px solid var(--error-color);
     border-radius: .25em;
     padding: .25em;
+    margin: .5em 0em;
 }
 
 @media only screen and (max-width: 900px) {
