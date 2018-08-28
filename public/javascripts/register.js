@@ -21,7 +21,7 @@ $(document).ready(() => {
 });
 
 function submitData() {
-    let formData = {
+    /* let formData = {
         'firstName': document.getElementById('firstName').value,
         'lastName': document.getElementById('lastName').value,
         'email': document.getElementById('email').value,
@@ -35,11 +35,31 @@ function submitData() {
         'formData': formData,
         'sessionData': userData
     }
+    */
+
+    let data = `
+        firstName=${document.getElementById('firstName').value}&
+        lastName=${document.getElementById('lastName').value}&
+        email=${document.getElementById('email').value}&
+        password=${document.getElementById('password').value}&
+        password2=${document.getElementById('password2').value}&
+        birthYear=${document.getElementById('birthYear').value}&
+        annualIncome=${cleanInput(document.getElementById('annualIncome').value)}&
+        retireAge=${userData[1]}&
+        netWorth=${cleanInput(document.getElementById('netWorth').value)}&
+        initInvest=${userData[2]}&
+        monthlySave=${userData[3]}&
+        monthlyExpenses=${userData[5]}&
+        riskWilling=${userData[7]}
+    `
+    // keep the data human-readable above and machine-readable when sent
+    let reg = /[\n\s]+/g;
+    data = data.replace(reg, '');
     
     $.ajax({
         url: '/register/createuser',
         type: 'POST',
-        data: { data: JSON.stringify(data) },
+        data: data, // { data: JSON.stringify(data) },
         error(jqXHR, textStatus, errorThrown) {
             console.log(errorThrown);
             return 'Error.'
@@ -47,11 +67,11 @@ function submitData() {
         success(data, textStatus, jqXHR) {
             console.log(`Data sent to server. Msg: ${data.msg}`);
             if (data.status === 'success') {
-                window.location.href = `/login`;
+                window.location.href = `/login/success`;
             } else {
                 let errors = '';
                 for (let i = 0; i < data.msg.length; i++) {
-                    errors += data.msg[i] + '\n';
+                    errors += data.msg[i] + '<br>';
                 }
                 document.getElementById('registerError').innerHTML = 'Error. ' + errors;
                 $('#registerError').fadeIn();

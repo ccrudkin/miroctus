@@ -20,6 +20,10 @@ router.get('/out', (req, res) => {
     res.render('login', { title: 'Miroctus - Login', headline: 'See your financial future.', msg: 'You are logged out.' } );
 });
 
+router.get('/success', (req, res) => {
+    res.render('login', { title: 'Miroctus - Login', headline: 'See your financial future.', msg: 'Account created. Please sign in.' } );
+});
+
 // config passport user/pass strategy
 passport.use(new LocalStrategy({
         usernameField: 'userEmail' // different from default 'username'

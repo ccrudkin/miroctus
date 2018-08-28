@@ -4,7 +4,7 @@ var MongoClient = require('mongodb').MongoClient;
 const murl = process.env.mongodbUrl; // from .env file -- change one place for whole app
 const dbName = 'miroctus';
 var bcrypt = require('bcryptjs');
-const { check, validationResult } = require('express-validator/check');
+const { body, check, validationResult } = require('express-validator/check');
 
 // GET registration page
 router.get('/', ensureNotAuthenticated, (req, res) => {
@@ -16,40 +16,51 @@ router.get('/loggedin', ensureAuthenticated, (req, res) => {
     res.render('loginCheck', { title: 'Miroctus', headline: 'See your financial future.' } );
 });
 
+/*
+router.post('/createuser', (req, res) => {
+        // console.log(JSON.parse(req.body.data));
+        let data = JSON.parse(req.body.data);
+        newUser(data)
+        .then((msg) => { res.send({ 'status': 'success', 'msg': [msg] }) })
+        .catch((err) => { res.send({ 'status': 'error', 'msg': [err] }) });
+});
+*/
+
+// validation setup and new user creation
 router.post('/createuser', [
     check('firstName').isLength({ min: 1 }).withMessage('First name is required.'),
     check('lastName').isLength({ min: 1 }).withMessage('Last name is required.'),
     check('email').isEmail().withMessage('Must use a valid email address.'),
     check('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long.'),
-    check('password2').exists()
+    check('password2').isLength({ min: 6 }).withMessage('Please confirm password.')
         .custom((value, { req }) => value === req.body.password).withMessage('Passwords must match.'),
-    check('birthYear').custom((value, { req }) => value > 1899).withMessage('Valid birth year is required.'),
-    check('annualIncome').exists().custom((value, { req }) => value > 0).withMessage('Positive annual income is required.'),
-    check('netWorth').exists().withMessage('Net worth is required.'),
-    ], 
+    check('birthYear').custom((value, { req }) => parseFloat(value) > 1899).withMessage('Valid birth year is required.'),
+    check('annualIncome').isLength({ min: 1 }).withMessage('Annual income is required.')
+        .custom((value, { req }) => parseFloat(value) > 0 ).withMessage('Annual income must be greater than 0.'),
+    body('netWorth').exists().withMessage('Net worth is required.')
+    ],
     (req, res) => {
-        const errorFormatter = ({ location, errMsg, param, value, nestedErrors }) => {
-            return `${errMsg}`;
+        console.log(req.body);
+        console.log(typeof(req.body));
+        const errorFormatter = ({ location, msg, param, value, nestedErrors }) => {
+            return `${msg}`;
         };
         const result = validationResult(req).formatWith(errorFormatter);
         if (!result.isEmpty()) {
+            console.log(result.array());
             res.send({ 'status': 'error', 'msg': result.array() });
         } else {
             // console.log(JSON.parse(req.body.data));
-            let data = JSON.parse(req.body.data);
+            let data = req.body;
             newUser(data)
             .then((msg) => { res.send({ 'status': 'success', 'msg': [msg] }) })
             .catch((err) => { res.send({ 'status': 'error', 'msg': [err] }) });
         }
 });
 
+
 // create new user
 function newUser(data) {
-    let formData = data.formData;
-    let sessionData = data.sessionData;
-
-    // console.log(formData);
-    // console.log(sessionData);
 
     let prom = new Promise((resolve, reject) => {
         MongoClient.connect(murl, { useNewUrlParser: true }, function(err, client) {
@@ -57,7 +68,7 @@ function newUser(data) {
     
             const db = client.db(dbName);
     
-            db.collection('users').find({ 'email': `${formData.email}` }).toArray((err, docs) => {
+            db.collection('users').find({ 'email': `${data.email}` }).toArray((err, docs) => {
                 if (err) {
                     console.log(err);
                     client.close();
@@ -70,7 +81,7 @@ function newUser(data) {
                     console.log('Creating new user document.');
                     
                     bcrypt.genSalt(10, function(err, salt) {
-                        bcrypt.hash(formData.password, salt, function(err, hash) {
+                        bcrypt.hash(data.password, salt, function(err, hash) {
                             // store hash
                             if (err) { 
                                 client.close();
@@ -78,19 +89,19 @@ function newUser(data) {
                             } else {
                                 db.collection('users').insertOne({
                 
-                                    'email': `${formData.email}`,
-                                    'firstName': `${formData.firstName}`,
-                                    'lastName': `${formData.lastName}`,
+                                    'email': `${data.email}`,
+                                    'firstName': `${data.firstName}`,
+                                    'lastName': `${data.lastName}`,
                                     'password': `${hash}`,
-                                    'birthYear': `${formData.birthYear}`,
-                                    'annualIncome': `${formData.annualIncome}`,
-                                    'netWorth': `${formData.netWorth}`,
-                                    'age': `${2018 - parseInt(formData.birthYear)}`,
-                                    'retireAge': `${sessionData[1]}`,
-                                    'initInvest': `${sessionData[2]}`,
-                                    'monthlySave': `${sessionData[3]}`,
-                                    'monthlyExpenses': `${sessionData[5]}`,
-                                    'riskWilling': `${sessionData[7]}`
+                                    'birthYear': `${data.birthYear}`,
+                                    'annualIncome': `${data.annualIncome}`,
+                                    'netWorth': `${data.netWorth}`,
+                                    'age': `${new Date().getFullYear() - parseInt(data.birthYear)}`,
+                                    'retireAge': `${data.retireAge}`,
+                                    'initInvest': `${data.initInvest}`,
+                                    'monthlySave': `${data.monthlySave}`,
+                                    'monthlyExpenses': `${data.monthlyExpenses}`,
+                                    'riskWilling': `${data.riskWilling}`
                 
                                 }, (err, result) => {
                                     if (err) {
