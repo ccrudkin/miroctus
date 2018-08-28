@@ -5,7 +5,7 @@ const murl = process.env.mongodbUrl; // from .env file -- change one place for w
 const dbName = 'miroctus';
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
-// var bcrypt = require('bcryptjs');
+var bcrypt = require('bcryptjs');
 
 // GET login page
 router.get('/', ensureNotAuthenticated, (req, res) => {
@@ -47,14 +47,22 @@ passport.use(new LocalStrategy({
                 client.close();
                 return done(null, false);
             } else {
-                if (result[0].password === password) {
-                    client.close();
-                    return done(null, result[0].email);
-                } else {
-                    console.log('Password not matched.');
-                    client.close();
-                    return done(null, false);
-                }
+                bcrypt.compare(password, result[0].password, function(err, res) {
+                    if (err) {
+                        console.log(err);
+                        client.close();
+                        return done(null, false);
+                    } else {
+                        if (res) {
+                            client.close();
+                            return done(null, result[0].email);
+                        } else {
+                            console.log('Password not matched.');
+                            client.close();
+                            return done(null, false);
+                        }
+                    }
+                });
             }
         });
     });

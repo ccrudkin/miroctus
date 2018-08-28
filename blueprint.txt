@@ -1,8 +1,9 @@
 TODO:
 -Refine CSS classes
 -refactor bloated calculator.js script
--refresh login/out nav link after logout
--treat calculator differently if user logged in
+-refresh login/out nav link after logout [x]
+-treat calculator differently if user logged in?
+-prevent going straight to registration (must use calc to get there) [x]
 
 
 -Minimum viable product.
@@ -11,8 +12,8 @@ TODO:
         -input cleaning [x]
             -auto add commas in relevant input fields [x]
         -help pages/tooltips for confusing questions
-        -Results overview
-            -Is it enough?
+        -Results overview [x]
+            -Is it enough? [x]
                 -Standard of living (income - savings rate) [x]
                 -Calculate number of withdrawals -- life expectancy [x]
                 -incorporate social security [x]
@@ -21,12 +22,12 @@ TODO:
             -charts [x]
             -display social security estimated withdrawal [x]
             -line chart with total portfolio value [x]
-            -account required
-                -database
-                -hashed passwords
+            -account required [x]
+                -database [x]
+                -hashed passwords [x]
             -Profile and portfolio
-                -add "standard of living" amount
-                -add SS benefit amount
+                -add "standard of living" amount [x]
+                -add SS benefit amount [x]
                 -generate a detailed report (less 'pretty,' more text and info)
     -Special advice
     -Learning page with resources
@@ -36,14 +37,16 @@ Account:
         -validate info
         -clean info / numbers [x]
     -sign-up page after calculator results overview, before portfolio details
-        -name, email, birthdate, other basic demographic info
+        -name, email, birthdate, other basic demographic info [x]
             -validation
-        -verified form info > connect to DB > create user profile > hash password
+        -verified form info > connect to DB > create user profile > hash password [x]
         -user agreement / information use? GDPR concerns?
     -logged in/out status via sessions with page permissions
         -basic calculator and 'Help' page access when logged out
-        -portfolio access and persistent data when logged in
+        -portfolio access and persistent data when logged in [x]
     -allow to edit user info when logged in
+        -financial information
+        -password
 
 
 

@@ -5,23 +5,23 @@
         <div class="container flexV">
             <div class="flexVL translucentBG formContainer" id="registrationForm">
                 <label for="firstName" class="formLabel">First name:</label>
-                <input type="text" class="formInput" id="firstName" name="firstName">
+                <input type="text" class="formInput" id="firstName" name="firstName" required="required">
                 <label for="lastName" class="formLabel">Last name:</label>
-                <input type="text" class="formInput" id="lastName" name="lastName">
+                <input type="text" class="formInput" id="lastName" name="lastName" required="required">
                 <label for="email" class="formLabel">Email address:</label>
-                <input type="email" class="formInput" id="email" name="email">
+                <input type="email" class="formInput" id="email" name="email" required="required">
                 <label for="password" class="formLabel">Password:</label>
-                <input type="password" class="formInput" id="password" name="password">
+                <input type="password" class="formInput" id="password" name="password" required="required">
                 <label for="password2" class="formLabel">Confirm password:</label>
-                <input type="password" class="formInput" id="password2" name="password">
+                <input type="password" class="formInput" id="password2" name="password2" required="required">
                 <br>
                 <span class="headline">Confirm your profile details:</span>
                 <label for="birthYear" class="formLabel">Birth year:</label>
                 <select name="birthYear" id="birthYear" class="formSelect"></select>
                 <label for="annualIncome" class="formLabel">Annual income:</label>
-                <input type="text" class="formInput" id="annualIncome" name="annualIncome">
+                <input type="text" class="formInput" id="annualIncome" name="annualIncome" required="required">
                 <label for="netWorth" class="formLabel">Liquid net worth:</label>
-                <input type="text" class="formInput" id="netWorth" name="netWorth">
+                <input type="text" class="formInput" id="netWorth" name="netWorth" required="required">
                 <button class="buttons" id="createProfileButton">Create profile</button>
                 <div class="messages" id="registerError" style="display: none"></div>
             </div>

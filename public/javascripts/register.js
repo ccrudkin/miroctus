@@ -1,5 +1,9 @@
 let userData = JSON.parse(sessionStorage.getItem('investmentProfile'));
 
+if (!userData) {
+    window.location.href = '/calculator';
+}
+
 $(document).ready(() => {
     let thisYear = 2018; // change to dynamic
     let age = userData[0];
@@ -45,7 +49,11 @@ function submitData() {
             if (data.status === 'success') {
                 window.location.href = `/login`;
             } else {
-                document.getElementById('registerError').innerHTML = 'Error. ' + data.msg;
+                let errors = '';
+                for (let i = 0; i < data.msg.length; i++) {
+                    errors += data.msg[i] + '\n';
+                }
+                document.getElementById('registerError').innerHTML = 'Error. ' + errors;
                 $('#registerError').fadeIn();
             }
         }
