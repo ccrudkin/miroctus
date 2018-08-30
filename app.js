@@ -12,6 +12,7 @@ var portRouter = require('./routes/portfolioBuilderRouter');
 var registerRouter = require('./routes/registerRouter');
 var loginRouter = require('./routes/loginRouter');
 var logoutRouter = require('./routes/logoutRouter');
+var accountRouter = require('./routes/accountRouter');
 
 var app = express();
 
@@ -57,6 +58,7 @@ app.use('/profile', portRouter);
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
+app.use('/account', accountRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

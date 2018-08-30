@@ -1,0 +1,24 @@
+<% include header %>
+    <div class="main flexV">
+        <% include mastHead %>
+        <div class="medBlank"></div>
+        <div class="container flexV">
+            <div class="flexVL translucentBG formContainer" id="account">
+                <div class="profileItem sizeUp">Name: <%= data.name %></div>
+                <div class="profileItem sizeUp">Email: <%= data.email %></div>
+                <div class="smlBlank"></div>
+                <div class="profileItem sizeUp">Change password:</div>            
+                <label for="oldPassword" class="formLabel">Old password:</label>
+                <input class="formInput" type="text" name="oldPassword" id="oldPassword">
+                <label for="newPassword" class="formLabel">New password:</label>
+                <input class="formInput" type="text" name="newPassword" id="newPassword">
+                <label for="newPassword2" class="formLabel">Confirm new password:</label>
+                <input class="formInput" type="text" name="newPassword2" id="newPassword2">
+                <div class="smlBlank"></div>
+                <button class="buttons" id="editProfileButton">Save</button>
+            </div>
+        </div>
+        <div class="medBlank"></div>
+    </div>
+
+<% include footer %>

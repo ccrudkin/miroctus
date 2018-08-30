@@ -365,6 +365,10 @@ ul {
     margin: 1em 0em;
 }
 
+.profileItem {
+    color: var(--gray-lt);
+}
+
 @media only screen and (max-width: 900px) {
     :root {
         --nav-width: 30%;
