@@ -21,12 +21,12 @@ router.get('/details', ensureAuthenticated, function(req, res) {
     .catch((err) => { res.send(err) });
 });
 
-/* // Deprecated, now /profile
+// Deprecated, now /profile
 // GET portfolio builder page
 router.get('/portfolio', ensureAuthenticated, function(req, res) {
     res.render('portfoliobuilder', { title: 'Build portfolio - Miroctus', headline: 'See your financial future.' });
 });
-*/
+
 
 router.get('/portfolio/:portfolio', ensureAuthenticated, function(req, res) {
     // console.log(portfolios[req.params.portfolio])
