@@ -1,0 +1,37 @@
+<% include header %>
+    <div class="main flexV">
+        <% include mastHead %>
+        <div class="medBlank"></div>
+        <div class="container flexV">
+            <div class="flexVL translucentBG" action="/profile/edit" method="post" id="profileEdit">
+                <label for="firstName" class="formLabel">First name:</label>
+                <input class="formInput" type="text" name="firstName" id="firstName" value="<%= data.firstName %>">
+                <label for="name" class="formLabel">Last name:</label>
+                <input class="formInput" type="text" name="lastName" id="lastName" value="<%= data.lastName %>">
+                <label for="birthYear" class="formLabel">Birth year:</label>
+                <input class="formInput" type="text" name="birthYear" id="birthYear" value="<%= data.birthYear %>">
+                <label for="initInvest" class="formLabel">Current investment portfolio value:</label>
+                <input class="formInput" type="text" name="initInvest" id="initInvest" value="$<%= parseFloat(data.initInvest).toLocaleString() %>">
+                <label for="retireAge" class="formLabel">Retirement age goal:</label>
+                <input class="formInput" type="text" name="retireAge" id="retireAge" value="<%= data.retireAge%> ">
+                <label for="annualIncome" class="formLabel">Annual income:</label>
+                <input class="formInput" type="text" name="annualIncome" id="annualIncome" value="$<%= parseFloat(data.annualIncome).toLocaleString() %>">
+                <label for="netWorth" class="formLabel">Liquid net worth:</label>
+                <input class="formInput" type="text" name="netWorth" id="netWorth" value="$<%= parseFloat(data.netWorth).toLocaleString() %>">
+                <label for="monthlyExpenses" class="formLabel">Monthly expenses:</label>
+                <input class="formInput" type="text" name="monthlyExpenses" id="monthlyExpenses" value="$<%= parseFloat(data.monthlyExpenses).toLocaleString() %>">
+                <label for="monthlySave" class="formLabel">Monthly savings:</label>
+                <input class="formInput" type="text" name="monthlySave" id="monthlySave" value="$<%= parseFloat(data.monthlySave).toLocaleString() %>">
+                <label for="riskWilling" class="formLabel">Risk willingness (1-5):</label>
+                <input class="formInput"  type="text" name="riskWilling" id="riskWilling" value="<%= data.riskWilling %> ">
+                <div class="smlBlank"></div>
+                <button class="buttons" id="saveProfileButton">Save</button>
+                <div class="sizeDown inform">Or <a href="/profile">return to profile.</a></div>
+            </div>
+            <div class="messages" id="updateMessage" style="display: none"></div>
+        </div>
+        <div class="medBlank"></div>
+    </div>
+    <script src="/javscripts/profileEdit.js"></script>
+
+<% include footer %>

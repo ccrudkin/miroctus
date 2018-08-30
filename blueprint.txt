@@ -2,6 +2,7 @@ TODO:
 -Refine CSS classes
 -refactor bloated calculator.js script
 -move formulas to backend
+-ability to edit profile details
 -refresh login/out nav link after logout [x]
 -treat calculator differently if user logged in?
 -prevent going straight to registration (must use calc to get there) [x]
