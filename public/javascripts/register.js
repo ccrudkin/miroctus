@@ -21,21 +21,6 @@ $(document).ready(() => {
 });
 
 function submitData() {
-    /* let formData = {
-        'firstName': document.getElementById('firstName').value,
-        'lastName': document.getElementById('lastName').value,
-        'email': document.getElementById('email').value,
-        'password': document.getElementById('password').value,
-        'birthYear': document.getElementById('birthYear').value,
-        'annualIncome': cleanInput(document.getElementById('annualIncome').value),
-        'netWorth': cleanInput(document.getElementById('netWorth').value)
-    };
-
-    let data = {
-        'formData': formData,
-        'sessionData': userData
-    }
-    */
 
     let data = `
         firstName=${document.getElementById('firstName').value}&

@@ -2,7 +2,8 @@ TODO:
 -Refine CSS classes
 -refactor bloated calculator.js script
 -move formulas to backend
--ability to edit profile details
+-ability to edit profile details [x]
+-ability to change password
 -refresh login/out nav link after logout [x]
 -treat calculator differently if user logged in?
 -prevent going straight to registration (must use calc to get there) [x]
@@ -32,6 +33,8 @@ TODO:
                 -add SS benefit amount [x]
                 -generate a detailed report (less 'pretty,' more text and info)
     -Special advice
+        -if not able to meet goal, suggest adjustments
+            -allow "live on less" option to adjust standard of living
     -Learning page with resources
 
 Account:
@@ -47,7 +50,7 @@ Account:
         -basic calculator and 'Help' page access when logged out
         -portfolio access and persistent data when logged in [x]
     -allow to edit user info when logged in
-        -financial information
+        -financial information [x]
         -password
 
 

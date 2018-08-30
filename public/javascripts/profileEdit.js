@@ -5,12 +5,12 @@ function submitData() {
         lastName=${document.getElementById('lastName').value}&
         birthYear=${document.getElementById('birthYear').value}&
         annualIncome=${cleanInput(document.getElementById('annualIncome').value)}&
-        retireAge=${userData[1]}&
+        retireAge=${document.getElementById('retireAge').value}&
         netWorth=${cleanInput(document.getElementById('netWorth').value)}&
-        initInvest=${cleanInput(userData[2])}&
-        monthlySave=${cleanInput(userData[3])}&
-        monthlyExpenses=${cleanInput(userData[5])}&
-        riskWilling=${userData[7]}
+        initInvest=${cleanInput(document.getElementById('initInvest').value)}&
+        monthlySave=${cleanInput(document.getElementById('monthlySave').value)}&
+        monthlyExpenses=${cleanInput(document.getElementById('monthlyExpenses').value)}&
+        riskWilling=${document.getElementById('riskWilling').value}
     `
     // keep the data human-readable above and machine-readable when sent
     let reg = /[\n\s]+/g;

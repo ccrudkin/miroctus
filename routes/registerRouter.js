@@ -88,21 +88,24 @@ function newUser(data) {
                                 reject(err);
                             } else {
                                 db.collection('users').insertOne({
-                
-                                    'email': `${data.email}`,
-                                    'firstName': `${data.firstName}`,
-                                    'lastName': `${data.lastName}`,
-                                    'password': `${hash}`,
-                                    'birthYear': `${data.birthYear}`,
-                                    'annualIncome': `${data.annualIncome}`,
-                                    'netWorth': `${data.netWorth}`,
-                                    'age': `${new Date().getFullYear() - parseInt(data.birthYear)}`,
-                                    'retireAge': `${data.retireAge}`,
-                                    'initInvest': `${data.initInvest}`,
-                                    'monthlySave': `${data.monthlySave}`,
-                                    'monthlyExpenses': `${data.monthlyExpenses}`,
-                                    'riskWilling': `${data.riskWilling}`
-                
+                                    
+                                    'user': {
+                                        'email': `${data.email}`,
+                                        'password': `${hash}`
+                                    },
+                                    'profile': {
+                                        'firstName': `${data.firstName}`,
+                                        'lastName': `${data.lastName}`,
+                                        'birthYear': `${data.birthYear}`,
+                                        'annualIncome': `${data.annualIncome}`,
+                                        'netWorth': `${data.netWorth}`,
+                                        'age': `${new Date().getFullYear() - parseInt(data.birthYear)}`,
+                                        'retireAge': `${data.retireAge}`,
+                                        'initInvest': `${data.initInvest}`,
+                                        'monthlySave': `${data.monthlySave}`,
+                                        'monthlyExpenses': `${data.monthlyExpenses}`,
+                                        'riskWilling': `${data.riskWilling}`
+                                    }                
                                 }, (err, result) => {
                                     if (err) {
                                         console.log(err);

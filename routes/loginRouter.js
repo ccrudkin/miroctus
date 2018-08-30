@@ -41,7 +41,7 @@ passport.use(new LocalStrategy({
 
         const db = client.db(dbName);
 
-        db.collection('users').find( { email: `${user}` }).toArray((err, result) => {
+        db.collection('users').find( { 'user.email': `${user}` }).toArray((err, result) => {
             if (err) {
                 console.log(err);
                 client.close();
@@ -51,7 +51,7 @@ passport.use(new LocalStrategy({
                 client.close();
                 return done(null, false);
             } else {
-                bcrypt.compare(password, result[0].password, function(err, res) {
+                bcrypt.compare(password, result[0].user.password, function(err, res) {
                     if (err) {
                         console.log(err);
                         client.close();
@@ -59,7 +59,7 @@ passport.use(new LocalStrategy({
                     } else {
                         if (res) {
                             client.close();
-                            return done(null, result[0].email);
+                            return done(null, result[0].user.email);
                         } else {
                             console.log('Password not matched.');
                             client.close();
@@ -87,7 +87,7 @@ passport.deserializeUser(function(user, done) {
         if (err) throw err;
         const db = client.db(dbName);
 
-        db.collection('users').find({ email: `${user}` }).toArray((err, result) => {
+        db.collection('users').find({ 'user.email': `${user}` }).toArray((err, result) => {
             if (result.length === 0) {
                 console.log('Authentication error.');
                 client.close();
