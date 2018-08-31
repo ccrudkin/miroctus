@@ -9,16 +9,18 @@
                 <div class="smlBlank"></div>
                 <div class="profileItem sizeUp">Change password:</div>            
                 <label for="oldPassword" class="formLabel">Old password:</label>
-                <input class="formInput" type="text" name="oldPassword" id="oldPassword">
+                <input class="formInput" type="password" name="oldPassword" id="oldPassword">
                 <label for="newPassword" class="formLabel">New password:</label>
-                <input class="formInput" type="text" name="newPassword" id="newPassword">
+                <input class="formInput" type="password" name="newPassword" id="newPassword">
                 <label for="newPassword2" class="formLabel">Confirm new password:</label>
-                <input class="formInput" type="text" name="newPassword2" id="newPassword2">
+                <input class="formInput" type="password" name="newPassword2" id="newPassword2">
                 <div class="smlBlank"></div>
-                <button class="buttons" id="editProfileButton">Save</button>
+                <button class="buttons" id="savePassButton">Save</button>
             </div>
+            <div class="messages" id="savePassMsg" style="display: none"></div>
         </div>
         <div class="medBlank"></div>
     </div>
+    <script src="/javascripts/account.js"></script>
 
 <% include footer %>
