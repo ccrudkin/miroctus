@@ -3,7 +3,11 @@ TODO:
 -refactor bloated calculator.js script
 -move formulas to backend
 -ability to edit profile details [x]
--ability to change password
+-ability to change password [x]
+!
+-ability to reset password
+-BUILD OUT FUNCTION TO SEND NEW PASSWORD TO USER EMAIL WITH NODEMAILER
+!
 -refresh login/out nav link after logout [x]
 -treat calculator differently if user logged in?
 -prevent going straight to registration (must use calc to get there) [x]

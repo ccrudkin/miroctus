@@ -12,6 +12,10 @@ router.get('/', ensureAuthenticated, function(req, res) {
     .catch((err) => { res.render('/logout') }); // change to be more useful!
 });
 
+router.get('/reset', ensureNotAuthenticated, (req, res) => {
+    res.render('reset', { title: 'Reset password - Miroctus', headline: 'See your financial future.' });
+});
+
 router.post('/', [ 
     check('newPassword').isLength({ min: 6 }).withMessage('New password must be at least 6 characters long.'),
     check('newPassword2').isLength({ min: 6 }).withMessage('Please confirm new password.')
@@ -29,6 +33,12 @@ router.post('/', [
             .then((msg) => { res.send({ 'status': 'success', 'msg': msg }) })
             .catch((err) => { res.send({ 'status': 'error', 'msg': err }) });
         }
+});
+
+router.post('/reset', ensureNotAuthenticated, (req, res) => {
+    resetPassword(req.body.email)
+    .then((msg) => { res.send({ 'status': 'success', 'msg': msg }) })
+    .catch((err) => { res.send({ 'status': 'error', 'msg': [err] }); });
 });
 
 function getProfileData(user) {
@@ -116,12 +126,67 @@ function changePassword(user, oldPass, newPass) {
     return prom;
 }
 
+function resetPassword(user) {
+    let prom = new Promise((resolve, reject) => {
+        MongoClient.connect(murl, { useNewUrlParser: true }, function(err, client) {
+            console.log('Database connection made -- changing password.');
+
+            const db = client.db(dbName);
+
+            db.collection('users').find( {'user.email': `${user}` }).toArray((err, docs) => {
+                if (err) {
+                    console.log(err);
+                    client.close();
+                    reject('User location error.');
+                } else {
+                    if (docs.length === 0) {
+                        console.log('User not found.');
+                        client.close();
+                        reject('User not found.');
+                    } else if (docs.length > 1) {
+                        console.log('ERROR: Duplicate/multiple accounts found.');
+                        client.close();
+                        reject('Error: Account conflicts.');
+                    } else if (docs.length === 1) {
+                        sendPass(genPass(), user);
+                    }
+                }
+            });
+        });
+    });
+    return prom;
+}
+
+function genPass() {
+    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
+    let newPass = [];
+    for (let i = 0; i < 16; i++) {
+        let c = Math.floor(Math.random() * chars.length); // change to more secure method before deploy
+        newPass.push(chars[c]);
+    }
+    return newPass.join('');
+}
+
+
+// BUILD OUT FUNCTION TO SEND NEW PASSWORD TO USER EMAIL WITH NODEMAILER
+function sendPass(pass, email) {
+
+}
+
 function ensureAuthenticated(req, res, next){
 	if(req.isAuthenticated()) {
 		return next();
 	} else {
 		res.redirect('/logout');
 	}
+}
+
+function ensureNotAuthenticated(req, res, next){
+    if(req.isAuthenticated()) {
+        res.redirect('/register/loggedin');
+    } else {
+        return next();
+    }
 }
 
 module.exports = router;

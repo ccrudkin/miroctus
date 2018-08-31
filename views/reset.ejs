@@ -1,0 +1,19 @@
+<% include header %>
+    <div class="main flexV">
+        <% include mastHead %>
+        <div class="medBlank"></div>
+        <div class="container flexV">
+            <div class="flexVL translucentBG formContainer" id="account">         
+                <div class="basic">Enter your email address and hit "Reset" to receive a new password by email.</div>
+                <div class="smlBlank"></div>  
+                <label for="email" class="formLabel">User email address:</label>
+                <input class="formInput" type="text" name="email" id="email">
+                <button class="buttons" id="resetPassButton">Reset</button>
+            </div>
+            <div class="messages" id="resetPassMsg" style="display: none"></div>
+        </div>
+        <div class="medBlank"></div>
+    </div>
+    <script src="/javascripts/reset.js"></script>
+
+<% include footer %>
