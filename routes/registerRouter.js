@@ -68,13 +68,13 @@ function newUser(data) {
     
             const db = client.db(dbName);
     
-            db.collection('users').find({ 'email': `${data.email}` }).toArray((err, docs) => {
+            db.collection('users').find({ 'user.email': `${data.email}` }).toArray((err, docs) => {
                 if (err) {
                     console.log(err);
                     client.close();
                     reject('Database error.');
                 } else if (docs.length > 0) {
-                    console.log('Creation error - user already exists.');
+                    console.log('Argh! Creation error - user already exists.');
                     client.close();
                     reject('An account is already associated with that email.');
                 } else {

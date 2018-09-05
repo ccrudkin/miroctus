@@ -4,7 +4,8 @@ var MongoClient = require('mongodb').MongoClient;
 const murl = process.env.mongodbUrl; // from .env file -- change one place for whole app
 const dbName = 'miroctus';
 const { check, validationResult } = require('express-validator/check');
-var bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
+const nodemailer = require('nodemailer');
 
 router.get('/', ensureAuthenticated, function(req, res) {
     getProfileData(req.user)
@@ -146,9 +147,14 @@ function resetPassword(user) {
                     } else if (docs.length > 1) {
                         console.log('ERROR: Duplicate/multiple accounts found.');
                         client.close();
-                        reject('Error: Account conflicts.');
+                        reject('Account conflicts.');
                     } else if (docs.length === 1) {
-                        sendPass(genPass(), user);
+                        sendPass(genPass(), user)
+                        .then((credentials) => { resetDBPass(credentials[0], credentials[1])
+                                                .then((msg) => { resolve(msg) })
+                                                .catch((err) => { reject(err) });
+                        })
+                        .catch((err) => { reject(err) });
                     }
                 }
             });
@@ -160,17 +166,95 @@ function resetPassword(user) {
 function genPass() {
     const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
     let newPass = [];
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < 10; i++) {
         let c = Math.floor(Math.random() * chars.length); // change to more secure method before deploy
         newPass.push(chars[c]);
     }
     return newPass.join('');
 }
 
+function resetDBPass(pass, user) {
+    let prom = new Promise((resolve, reject) => {
+        MongoClient.connect(murl, { useNewUrlParser: true }, function(err, client) {
+            const db = client.db(dbName);
+
+            bcrypt.genSalt(10, function(err, salt) {
+                bcrypt.hash(pass, salt, function(err, hash) {
+                    // store hash
+                    if (err) { 
+                        client.close();
+                        reject(err);
+                    } else {
+                        db.collection('users').updateOne(
+                            { 'user.email': `${user}` },
+                            {
+                                $set: {
+                                    'user.password': `${hash}`
+                                }
+                            }, (err, result) => {
+                                if (err) {
+                                    client.close();
+                                    console.log(err);
+                                    reject('Password reset error. Please try again.');
+                                } else {
+                                    client.close();
+                                    console.log('Password reset successful.');
+                                    resolve('Please check your email and follow the instructions.');
+                                }
+                            }
+                        )
+                    }
+                });
+            });
+        });
+    });
+    return prom;
+}
 
 // BUILD OUT FUNCTION TO SEND NEW PASSWORD TO USER EMAIL WITH NODEMAILER
 function sendPass(pass, email) {
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+        host: 'smtp.mail.com',
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+            user: process.env.emailuser, // email service user
+            pass: process.env.emailpass // email service password
+        }
+    });
 
+    let todate = new Date();
+
+    // setup email data with unicode symbols
+    let mailOptions = {
+        from: '"Password manager" <sitehost@engineer.com>', // sender address
+        to: email, // receiver(s)
+        subject: `Password reset from Miroctus - ${todate.toString().slice(4, 24)}`, // Subject line
+        // text: 
+        html: `<p>The password associated with this email account at Miroctus has been reset.</p>
+                <p>Please log in using the following password. Then navigate to your Account 
+                (<a href="/account">miroctus.herokuapp.com/account</a>) and choose a new password.</p>
+                <p>Temporary password: <strong>${pass}</strong></p>
+                <br>
+                <p>Thanks!</p>
+                <br>
+                <p>--</p>
+                <p>The Miroctus Team</p>`
+    };
+    // send mail with defined transport object and return promise
+    let prom = new Promise((resolve, reject) => {
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.log(error);
+                reject('There was an error. Please try again.');
+            } else {
+                resolve([ pass, email ]);
+            }
+        });
+    });
+
+    return prom;
 }
 
 function ensureAuthenticated(req, res, next){

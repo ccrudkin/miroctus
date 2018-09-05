@@ -18,9 +18,10 @@ function savePass() {
             return 'Error.'
         },
         success(data, textStatus, jqXHR) {
-            console.log(`Data sent to server. Msg: ${data.msg}`);
+            console.log(`Howdy! Data sent to server. Msg: ${data.msg}`);
             if (data.status === 'success') {
                 document.getElementById('savePassMsg').innerHTML = `${data.msg}`;
+                formReset();
                 $('#savePassMsg').fadeIn();
             } else {
                 let errors = '';
@@ -28,10 +29,17 @@ function savePass() {
                     errors += data.msg[i] + '<br>';
                 }
                 document.getElementById('savePassMsg').innerHTML = 'Error. ' + errors;
+                formReset();
                 $('#savePassMsg').fadeIn();
             }
         }
     });
+}
+
+function formReset() {
+    document.getElementById('oldPassword').value = '';
+    document.getElementById('newPassword').value = '';
+    document.getElementById('newPassword2').value = '';
 }
 
 document.getElementById('savePassButton').addEventListener('click', savePass);

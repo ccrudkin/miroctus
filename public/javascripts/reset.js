@@ -25,7 +25,7 @@ function resetPass() {
                 for (let i = 0; i < data.msg.length; i++) {
                     errors += data.msg[i] + '<br>';
                 }
-                document.getElementById('savePassMsg').innerHTML = 'Error. ' + errors;
+                document.getElementById('resetPassMsg').innerHTML = 'Error. ' + errors;
                 $('#resetPassMsg').fadeIn();
             }
         }
