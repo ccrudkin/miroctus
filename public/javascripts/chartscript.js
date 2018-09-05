@@ -62,7 +62,7 @@ function drawChart(data) {
                         let dataset = data.datasets[tooltipItem.datasetIndex];
                         // console.log(dataset);
                         let currentValue = dataset.data[tooltipItem.index];
-                        let percentage = currentValue * 100;
+                        let percentage = Math.round(currentValue * 1000) / 10;
                         let labelText = dataset._meta[1].data[tooltipItem.index]._model.label;
                         return `${labelText}: ${percentage}%`;
                     }
