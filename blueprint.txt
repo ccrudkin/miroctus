@@ -2,15 +2,7 @@ TODO:
 -Refine CSS classes
 -refactor bloated calculator.js script
 -move formulas to backend
--ability to edit profile details [x]
--ability to change password [x]
-!
--ability to reset password
--BUILD OUT FUNCTION TO SEND NEW PASSWORD TO USER EMAIL WITH NODEMAILER
-!
--refresh login/out nav link after logout [x]
 -treat calculator differently if user logged in?
--prevent going straight to registration (must use calc to get there) [x]
 
 
 -Minimum viable product.
@@ -36,9 +28,12 @@ TODO:
                 -add "standard of living" amount [x]
                 -add SS benefit amount [x]
                 -generate a detailed report (less 'pretty,' more text and info)
+                    -yearly activity
+                    -iShares breakdown
     -Special advice
         -if not able to meet goal, suggest adjustments
             -allow "live on less" option to adjust standard of living
+            -suggest changes in retirement age, monthly savings, risk, etc.
     -Learning page with resources
 
 Account:

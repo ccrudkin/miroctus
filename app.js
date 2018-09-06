@@ -8,11 +8,12 @@ var passport = require('passport');
 
 var indexRouter = require('./routes/indexRouter');
 var calcRouter = require('./routes/calcRouter');
-var portRouter = require('./routes/portfolioBuilderRouter');
+var profileRouter = require('./routes/profileRouter');
 var registerRouter = require('./routes/registerRouter');
 var loginRouter = require('./routes/loginRouter');
 var logoutRouter = require('./routes/logoutRouter');
 var accountRouter = require('./routes/accountRouter');
+var portRouter = require('./routes/portfolioRouter');
 
 var app = express();
 
@@ -54,11 +55,12 @@ app.use(function (req, res, next) {
 // tier one routing
 app.use('/', indexRouter);
 app.use('/calculator', calcRouter);
-app.use('/profile', portRouter);
+app.use('/profile', profileRouter);
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
 app.use('/account', accountRouter);
+app.use('/portfolio', portRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

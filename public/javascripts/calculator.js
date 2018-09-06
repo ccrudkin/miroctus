@@ -141,12 +141,12 @@ function toPortfolio(e) {
         document.getElementById('toAction').innerHTML = 
         `<p>That's not enough, but we can still help you revise and build a plan to meet your goals. Check out your summary below.</p>
         <p>Then, create a free account in one easy step and get your portfolio details.</p>
-        <button class="buttons" id="toActionButton">Sign up</button>`;
+        <button class="buttons" id="toActionButton">Go</button>`;
     } else {
         document.getElementById('toAction').innerHTML = 
         `<p>That's enough to meet your goal -- check out your summary below.</p>
         <p>Then, create a free account in one easy step and get your portfolio details.</p>
-        <button class="buttons" id="toActionButton">Register</button>`;
+        <button class="buttons" id="toActionButton">Go</button>`;
     }
     $('#toAction').fadeIn();
     document.getElementById('toActionButton').addEventListener('click', () => {
