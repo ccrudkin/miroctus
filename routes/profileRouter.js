@@ -9,7 +9,7 @@ const { body, check, validationResult } = require('express-validator/check');
 // GET basic profile page
 router.get('/', ensureAuthenticated, function(req, res) {
     getProfileData(req.user)
-    .then((data) => { res.render('profile', { title: 'Build portfolio - Miroctus', headline: 'See your financial future.', data: data }); })
+    .then((data) => { res.render('profile', { title: 'View profile - Miroctus', headline: 'See your financial future.', data: data }); })
     .catch((err) => { res.render('/logout') }); // change to be more useful!
 });
 
@@ -37,7 +37,7 @@ router.get('/portfolio/:portfolio', ensureAuthenticated, function(req, res) {
 router.get('/edit', ensureAuthenticated, function(req, res) {
     getProfileData(req.user)
     .then((data) => { res.render('profileEdit', { title: 'Edit profile - Miroctus', headline: 'See your financial future.', data: data }); })
-    .catch((err) => { res.render('/logout') }); // change to be more useful!
+    .catch((err) => { res.render('logout') }); // change to be more useful!
 });
 
 router.post('/edit', ensureAuthenticated, [

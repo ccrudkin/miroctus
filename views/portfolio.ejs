@@ -3,13 +3,16 @@
         <% include mastHead %>
         <div class="medBlank"></div>
         <div class="container flexV">
-            <div class="flexVL translucentBG" id="profileEdit">
-
+            <div class="flexV translucentBG" id="profileEdit">
+                <div class="inform">Your Portfolio Report</div>
+                <div class="inform" id="profile">
+                    <%= JSON.stringify(data, null, ' ') %>
+                </div>
             </div>
             <div class="messages" id="updateMessage" style="display: none"></div>
         </div>
         <div class="medBlank"></div>
     </div>
-    <script src="/javascripts/profileEdit.js"></script>
+    <script src="/javascripts/portfolio.js"></script>
 
 <% include footer %>

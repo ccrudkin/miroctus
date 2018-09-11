@@ -10,7 +10,7 @@ const riskReturn = {
 const inflation = .0289;
 
 function annualGrowth(i, a, r) { // initial investment, annual addition, growth rate
-    let yearEnd = (i + a) * (1 + r);
+    let yearEnd = (parseFloat(i) + parseFloat(a)) * (1 + r);
     return yearEnd;
 }
 
@@ -19,15 +19,25 @@ function totalGrowth(years, i, a, r) {
                 `Initial investment: ${i}\n` +
                 `Annual additions: ${a}\n` +
                 `Growth rate: ${r}`); // debugging
-    let annualAmounts = [i];
+    let growthData = {};                
     for (let j = 0; j < years; j++) {
+        growthData[j] = {};
+
         // console.log(`Year ${j} start -- Total: $${i}`); // debugging
+        growthData[j]['start'] = i;
+
         let aAdjusted = a * (1 + inflation) ** (j + 1);
+        growthData[j]['additions'] = aAdjusted;
         // console.log(`Adjusted addition for year ${j}: ${aAdjusted}`); // debugging
+
         i = annualGrowth(i, aAdjusted, r);
-        annualAmounts.push(Math.round(i));
+        growthData[j]['iReturn'] = i - growthData[j]['start'] - aAdjusted;
+        // console.log(`Year end amount after addition and growth: ${i}`);
+
+        growthData[j]['end'] = i;
     }
-    return { 'totalGrowth': i, 'annualAmounts': annualAmounts };
+    // console.log(`Growth data object: ${JSON.stringify(growthData, null, ' ')}`);
+    return growthData;
 }
 
 function withDraw(p, w, r) { // portfolio value, withdrawal rate, growth rate
