@@ -47,18 +47,27 @@ function withDraw(p, w, r) { // portfolio value, withdrawal rate, growth rate
 
 function totalWithDraw(iyears, ryears, p, salary, w, r) {
     console.log(`Years of retirement: ${ryears}\nPortfolio size: ${p}\nWithdrawal rate: ${w}\nGrowth rate: ${r}`);
-    let annualAmounts = [];
-    let withDrawAmounts = [];
+
+    let withDrawData = {};
     for (let j = 0; j < ryears; j++) {
-        console.log(`Year ${j} starting amount: $${p}`); // debugging
+        withDrawData[j] = {};
+        
+        // console.log(`Year ${j} starting amount: $${p}`); // debugging
+        withDrawData[j]['start'] = p;
+
         let wAdjusted = w * (1 + inflation) ** (j + iyears);
-        withDrawAmounts.push(Math.round(wAdjusted));
-        wAdjusted -= SSben(85 - ryears, j, salary);
-        console.log(`Year ${j} adjusted withdrawal (with SS): $${wAdjusted}`); // debugging
+        withDrawData[j]['totalIncome'] = wAdjusted;
+
+        withDrawData[j]['SSbenAmount'] = SSben(85 - ryears, j, salary);
+
+        wAdjusted -= withDrawData[j]['SSbenAmount'];
+        // console.log(`Year ${j} adjusted withdrawal (with SS): $${wAdjusted}`); // debugging
+        withDrawData[j]['portfolioWithDrawal'] = wAdjusted;
+
         p = withDraw(p, wAdjusted, r);
-        annualAmounts.push(Math.round(p));
+        withDrawData[j]['end'] = p;
     }
-    return { "totalWithDraw": p, "annualAmounts": annualAmounts, "withDrawAmounts": withDrawAmounts };
+    return withDrawData;
 }
 
 // calculate social security benefit based on retirement age, according to gov't formula
@@ -74,7 +83,7 @@ function SSben(retirementAge, retirementYear, salary) {
     } else if (aime > bendPoints[1]) {
         pia = (bendPoints[0] * .9) + ((bendPoints[1] - bendPoints[0]) * .32) + (aime - bendPoints[1]) * .15;
     }
-    console.log(`Unadjusted PIA: ${pia}`); // debugging
+    // console.log(`Unadjusted PIA: ${pia}`); // debugging
     if (retirementAge < 67 && retirementAge >= 64) {
         pia = pia * (1 - (.0667 * (67 - retirementAge)));
     } else if (retirementAge < 64) {
@@ -84,8 +93,8 @@ function SSben(retirementAge, retirementYear, salary) {
     } else if (retirementAge > 70) {
         pia = pia * (1 + 3 * .08);
     }
-    console.log(`Adjusted PIA: ${pia}`); // debugging
-    console.log(`Adjusted PIA with inflation: ${pia * (1 + inflation) ** retirementYear}`)
+    // console.log(`Adjusted PIA: ${pia}`); // debugging
+    // console.log(`Adjusted PIA with inflation: ${pia * (1 + inflation) ** retirementYear}`)
     return (pia * 12) * (1 + inflation) ** retirementYear;
 }
 

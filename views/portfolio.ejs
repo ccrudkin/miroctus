@@ -3,10 +3,51 @@
         <% include mastHead %>
         <div class="medBlank"></div>
         <div class="container flexV">
-            <div class="flexV translucentBG" id="profileEdit">
-                <div class="inform">Your Portfolio Report</div>
-                <div class="inform" id="profile">
-                    <%= JSON.stringify(data, null, ' ') %>
+            <div class="flexV translucentBG inform">
+                <div class="headline">Your Portfolio Report</div>
+                <div class="inform">Pre-retirement:</div>
+                <div class="scroll">
+                    <table class="table">
+                        <tr>
+                            <th>Age:</th>
+                            <th>Starting value:</th>
+                            <th>Annual addition:</th>
+                            <th>Annual return:</th>
+                            <th>Ending value:</th>
+                        </tr>
+                        <% for (key in data.preRetire) { %>
+                            <tr class="sizeDown">
+                                <td><%= Math.round(key) %></td>
+                                <td>$<%= Math.round(data.preRetire[key].start).toLocaleString() %></td>
+                                <td>$<%= Math.round(data.preRetire[key].additions).toLocaleString() %></td>
+                                <td>$<%= Math.round(data.preRetire[key].iReturn).toLocaleString() %></td>
+                                <td>$<%= Math.round(data.preRetire[key].end).toLocaleString() %></td>
+                            </tr>
+                        <% } %>
+                    </table>
+                </div>
+                <div class="inform">Post-retirement:</div>
+                <div class="scroll">
+                    <table class="table">
+                        <tr>
+                            <th>Age:</th>
+                            <th>Starting value:</th>
+                            <th>Portfolio withdrawal:</th>
+                            <th>Social Security:</th>
+                            <th>Total annual income:</th>
+                            <th>Ending value:</th>
+                        </tr>
+                        <% for (key in data.postRetire) { %>
+                            <tr class="sizeDown">
+                                <td><%= Math.round(key) %></td>
+                                <td>$<%= Math.round(data.postRetire[key].start).toLocaleString() %></td>
+                                <td>$<%= Math.round(data.postRetire[key].portfolioWithDrawal).toLocaleString() %></td>
+                                <td>$<%= Math.round(data.postRetire[key].SSbenAmount).toLocaleString() %></td>
+                                <td>$<%= Math.round(data.postRetire[key].totalIncome).toLocaleString() %></td>
+                                <td>$<%= Math.round(data.postRetire[key].end).toLocaleString() %></td>
+                            </tr>
+                        <% } %>
+                    </table>
                 </div>
             </div>
             <div class="messages" id="updateMessage" style="display: none"></div>

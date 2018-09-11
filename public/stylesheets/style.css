@@ -369,6 +369,26 @@ ul {
     color: var(--gray-lt);
 }
 
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table tr:nth-child(odd) {
+    background-color: rgba(235, 245, 251, .1);
+}
+
+.table th {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    padding: 0em .25em;
+}
+
+.scroll {
+    overflow-x: auto;
+    width: 100%;
+}
+
 @media only screen and (max-width: 900px) {
     :root {
         --nav-width: 30%;

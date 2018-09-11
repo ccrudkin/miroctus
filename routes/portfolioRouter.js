@@ -29,17 +29,26 @@ function generateReport(user) {
 
 function calcuateReport(data) {
     let prom = new Promise((resolve, reject) => {
-        console.log(`User data:\n${JSON.stringify(data, null, ' ')}`);
+        // console.log(`User data:\n${JSON.stringify(data, null, ' ')}`);
+
+        let reportData = {
+            'preRetire': {},
+            'postRetire': {}
+        };
 
         let preRetireGrowth = formulas.totalGrowth(data.retireAge - data.age, data.initInvest, 
             data.monthlySave * 12, formulas.riskReturn[data.riskWilling]);
         
-        console.log(`Pre-retire growth:\n${JSON.stringify(preRetireGrowth, null, ' ')}`);
-
-        let reportData = {};
+        // console.log(`Pre-retire growth:\n${JSON.stringify(preRetireGrowth, null, ' ')}`);
 
         for (let key in preRetireGrowth) {
-            reportData[parseInt(key) + parseInt(data.age)] = preRetireGrowth[key];
+            reportData['preRetire'][parseInt(key) + parseInt(data.age)] = preRetireGrowth[key];
+        }
+
+        let postRetire = postRetirement(data, reportData['preRetire'][data.retireAge - 1]['end']);
+        
+        for (let key in postRetire) {
+            reportData['postRetire'][parseInt(key) + parseInt(data.retireAge)] = postRetire[key];
         }
 
         if (reportData) {
@@ -49,6 +58,18 @@ function calcuateReport(data) {
         }
     });
     return prom;
+}
+
+function postRetirement(userData, nestEgg) {
+    let iyears = userData.retireAge - userData.age; // years to retirement from now
+    let ryears = 85 - userData.retireAge;
+    let salary = userData.annualIncome;
+    let withDrawRate = parseFloat(salary * .925 - userData.monthlySave * 12);
+    let growthRate = formulas.riskReturn[3];
+
+    let postRetire = formulas.totalWithDraw(iyears, ryears, nestEgg, salary, withDrawRate, growthRate);
+
+    return postRetire;
 }
 
 function getProfileData(user) {
