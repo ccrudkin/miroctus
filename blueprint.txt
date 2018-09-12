@@ -2,7 +2,8 @@ TODO:
 -Refine CSS classes
 -refactor bloated calculator.js script
 -move formulas to backend
--treat calculator differently if user logged in?
+-edit profile on-page
+    -profile editing validation improvements (no letters or non [$,] chars)
 
 
 -Minimum viable product.

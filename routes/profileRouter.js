@@ -52,6 +52,7 @@ router.post('/edit', ensureAuthenticated, [
     check('monthlyExpenses').isLength({ min: 1 }).withMessage('Monthly expenses are required.'),
     check('monthlySave').isLength({ min: 1 }).withMessage('Monthly savings is required.'),
     check('riskWilling').isLength({ min: 1 }).withMessage('Risk willingness is required.')
+        .custom((value, { req }) => ['1', '2', '3', '4', '5'].includes(value)).withMessage('Risk willingness must be an integer from 1 to 5.')
     ],
     (req, res) => {
         console.log(req.body);
