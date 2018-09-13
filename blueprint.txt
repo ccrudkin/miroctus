@@ -2,8 +2,11 @@ TODO:
 -Refine CSS classes
 -refactor bloated calculator.js script
 -move formulas to backend
+-get 'age' from (current year) - (birth year) across functions
+-retirement income/standard of living
 -edit profile on-page
     -profile editing validation improvements (no letters or non [$,] chars)
+    -refresh charts seamlessly (without reload)
 
 
 -Minimum viable product.
@@ -11,7 +14,6 @@ TODO:
         -input validation
         -input cleaning [x]
             -auto add commas in relevant input fields [x]
-        -help pages/tooltips for confusing questions
         -Results overview [x]
             -Is it enough? [x]
                 -Standard of living (income - savings rate) [x]
@@ -35,7 +37,9 @@ TODO:
         -if not able to meet goal, suggest adjustments
             -allow "live on less" option to adjust standard of living
             -suggest changes in retirement age, monthly savings, risk, etc.
-    -Learning page with resources
+    -Help/learning page 
+        -FAQ and resources
+        -contact
 
 Account:
     -intake info

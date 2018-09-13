@@ -6,6 +6,8 @@ var MongoClient = require('mongodb').MongoClient;
 const murl = process.env.mongodbUrl; // from .env file -- change one place for whole app
 const dbName = 'miroctus';
 
+let cYear = parseFloat(new Date().getFullYear());
+console.log('Bonjour! It is ' + cYear)
 
 // GET portfolio page
 router.get('/', ensureAuthenticated, function(req, res) {
@@ -36,13 +38,13 @@ function calcuateReport(data) {
             'postRetire': {}
         };
 
-        let preRetireGrowth = formulas.totalGrowth(data.retireAge - data.age, data.initInvest, 
+        let preRetireGrowth = formulas.totalGrowth(data.retireAge - (cYear - data.birthYear), data.initInvest, 
             data.monthlySave * 12, formulas.riskReturn[data.riskWilling]);
         
         // console.log(`Pre-retire growth:\n${JSON.stringify(preRetireGrowth, null, ' ')}`);
 
         for (let key in preRetireGrowth) {
-            reportData['preRetire'][parseInt(key) + parseInt(data.age)] = preRetireGrowth[key];
+            reportData['preRetire'][parseInt(key) + parseInt(cYear - data.birthYear)] = preRetireGrowth[key];
         }
 
         let postRetire = postRetirement(data, reportData['preRetire'][data.retireAge - 1]['end']);
@@ -61,7 +63,7 @@ function calcuateReport(data) {
 }
 
 function postRetirement(userData, nestEgg) {
-    let iyears = userData.retireAge - userData.age; // years to retirement from now
+    let iyears = userData.retireAge - (cYear - userData.birthYear); // years to retirement from now
     let ryears = 85 - userData.retireAge;
     let salary = userData.annualIncome;
     let withDrawRate = parseFloat(salary * .925 - userData.monthlySave * 12);
@@ -85,7 +87,6 @@ function getProfileData(user) {
                     client.close();
                     reject('Database error.');
                 } else {
-                    // send data
                     client.close();
                     resolve(docs[0].profile); // shouldn't send all data -- some is sensitive
                 }

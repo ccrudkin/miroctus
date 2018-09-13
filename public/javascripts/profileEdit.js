@@ -29,6 +29,13 @@ function submitData() {
             if (data.status === 'success') {
                 document.getElementById('updateMessage').innerHTML = `${data.msg}`;
                 $('#updateMessage').fadeIn();
+                // getUserData(); // not needed with reload
+                setTimeout(function() {
+                    // $('#updateMessage').fadeOut();
+                    location.reload(true);
+                },
+                    1000
+                );
             } else {
                 let errors = '';
                 for (let i = 0; i < data.msg.length; i++) {

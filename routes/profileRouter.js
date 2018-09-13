@@ -33,30 +33,30 @@ router.get('/portfolio/:portfolio', ensureAuthenticated, function(req, res) {
     res.send(portfolios[req.params.portfolio]);
 });
 
+/*
 // GET portfolio builder page
 router.get('/edit', ensureAuthenticated, function(req, res) {
     getProfileData(req.user)
     .then((data) => { res.render('profileEdit', { title: 'Edit profile - Miroctus', headline: 'See your financial future.', data: data }); })
     .catch((err) => { res.render('logout') }); // change to be more useful!
 });
+*/
 
 router.post('/edit', ensureAuthenticated, [
     check('firstName').isLength({ min: 1 }).withMessage('First name is required.'),
     check('lastName').isLength({ min: 1 }).withMessage('Last name is required.'),
-    check('birthYear').custom((value, { req }) => parseFloat(value) > 1899).withMessage('Valid birth year is required.'),
-    check('initInvest').isLength({ min: 1 }).withMessage('Portfolio value is required.'),
-    check('retireAge').isLength({ min: 1 }).withMessage('Retirement age is required.'),
-    check('annualIncome').isLength({ min: 1 }).withMessage('Annual income is required.')
-        .custom((value, { req }) => parseFloat(value) > 0 ).withMessage('Annual income must be greater than 0.'),
-    check('netWorth').exists().withMessage('Net worth is required.'),
-    check('monthlyExpenses').isLength({ min: 1 }).withMessage('Monthly expenses are required.'),
-    check('monthlySave').isLength({ min: 1 }).withMessage('Monthly savings is required.'),
-    check('riskWilling').isLength({ min: 1 }).withMessage('Risk willingness is required.')
-        .custom((value, { req }) => ['1', '2', '3', '4', '5'].includes(value)).withMessage('Risk willingness must be an integer from 1 to 5.')
+    check('birthYear').custom((value, { req }) => parseFloat(value) > 1899).withMessage('Valid birth year is required.')
+        .isNumeric().withMessage('Valid birth year is required.'),
+    check('initInvest').isNumeric().withMessage('Portfolio value must be a valid number.'),
+    check('retireAge').isNumeric().withMessage('Retirement age must be a valid number.'),
+    check('annualIncome').custom((value, { req }) => parseFloat(value) > 0 ).withMessage('Annual income must be greater than 0.'),
+    check('netWorth').isNumeric().withMessage('Net worth must be a valid number.'),
+    check('monthlyExpenses').isNumeric().withMessage('Monthly expenses must be a valid number.'),
+    check('monthlySave').isNumeric().withMessage('Monthly savings must be a valid number.'),
+    check('riskWilling').custom((value, { req }) => ['1', '2', '3', '4', '5'].includes(value)).withMessage('Risk willingness must be an integer from 1 to 5.')
     ],
     (req, res) => {
         console.log(req.body);
-        console.log(typeof(req.body));
         const errorFormatter = ({ location, msg, param, value, nestedErrors }) => {
             return `${msg}`;
         };

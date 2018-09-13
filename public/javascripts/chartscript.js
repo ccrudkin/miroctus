@@ -1,7 +1,7 @@
 function drawChart(data) {
-    var ctx = document.getElementById("chart");
+    var ctx = document.getElementById("allocationChart");
 
-    var myChart = new Chart(ctx, {
+    var portChart = new Chart(ctx, {
         type: 'doughnut',
         data: {
             datasets: [{
@@ -81,7 +81,7 @@ function drawGrowthBar(age, data) {
         labels.push(i + parseInt(age));
     }
 
-    var myChart = new Chart(ctx, {
+    var growthLineChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: labels,

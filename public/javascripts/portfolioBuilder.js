@@ -30,12 +30,11 @@ function recommendations(riskNum) {
             console.log(errorThrown);
         },
         success(data, textStatus, jqXHR) {
-            document.getElementById('allocationChart').innerHTML = 
+            document.getElementById('allocationChartContainer').innerHTML = 
             `<div class="headline">${data.name} Portfolio</div>
             <div class="flexH" id="allocationDetails">
-                <!-- <img src="/images/charts/${riskNum}.png" alt="${riskNum} allocation chart"> -->
-                <div class="chartContainer">
-                    <canvas class='chart' id="chart" width="300" height="300"></canvas>
+                <div class="chartContainer" id="allocationInnerChart">
+                    <canvas class="chart" id="allocationChart" width="300" height="300"></canvas>
                 </div>
                 <span class="flexV">
                     <span style="font-size: 1.15em";>Historical return: ${data.return * 100}% annually</span> 
@@ -56,7 +55,7 @@ function recommendations(riskNum) {
     });
 }
 
-let userData = getUserData();
+getUserData();
 
 /* // populate user profile data from session; DEPRECATED
 document.getElementById('userProfile').innerHTML = 
