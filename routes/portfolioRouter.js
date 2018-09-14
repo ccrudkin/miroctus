@@ -66,7 +66,7 @@ function postRetirement(userData, nestEgg) {
     let iyears = userData.retireAge - (cYear - userData.birthYear); // years to retirement from now
     let ryears = 85 - userData.retireAge;
     let salary = userData.annualIncome;
-    let withDrawRate = parseFloat(salary * .925 - userData.monthlySave * 12);
+    let withDrawRate = userData.retireIncome;
     let growthRate = formulas.riskReturn[3];
 
     let postRetire = formulas.totalWithDraw(iyears, ryears, nestEgg, salary, withDrawRate, growthRate);

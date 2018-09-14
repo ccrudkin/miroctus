@@ -13,7 +13,7 @@ function growthChart(userData) {
         let years = parseFloat(userData.retireAge - userData.age);
         let retireLength = parseFloat(85 - userData.retireAge);
         let salary = parseFloat(userData.annualIncome);
-        let income = parseFloat(salary * .925 - userData.monthlySave * 12);
+        let income = parseFloat(userData.retireIncome);
         let retireEnd = totalWithDraw(years, retireLength, nestEgg, salary, income, riskReturn[3]);
         userData.ssBen = SSben(userData.retireAge, 0, salary);
         let annualAmounts = retireEnd.annualAmounts;

@@ -4,6 +4,7 @@
         <div class="medBlank"></div>
         <div class="container flexV">
             <div class="flexVL translucentBG formContainer" id="account">
+                <div class="headline">Account</div>
                 <div class="profileItem basic sizeUp">Name: <%= data.name %></div>
                 <div class="profileItem basic sizeUp">Email: <%= data.email %></div>
                 <div class="smlBlank"></div>
@@ -18,9 +19,47 @@
                 <button class="buttons" id="savePassButton">Save</button>
             </div>
             <div class="messages" id="savePassMsg" style="display: none"></div>
+            <div class="smlBlank"></div>
+            <div class="flexVL translucentBG formContainer" id="profileEdit">
+                <div class="headline">Edit profile details</div>
+                <label for="firstName" class="formLabel">First name:</label>
+                <input class="formInput" type="text" name="firstName" id="firstName" value="<%= data.profile.firstName %>">
+                <label for="name" class="formLabel">Last name:</label>
+                <input class="formInput" type="text" name="lastName" id="lastName" value="<%= data.profile.lastName %>">
+                <label for="birthYear" class="formLabel">Birth year:</label>
+                <input class="formInput" type="text" name="birthYear" id="birthYear" value="<%= data.profile.birthYear %>">
+                <label for="initInvest" class="formLabel">Current portfolio value:</label>
+                <input class="formInput" type="text" name="initInvest" id="initInvest" value="$<%= parseFloat(data.profile.initInvest).toLocaleString() %>">
+                <label for="retireAge" class="formLabel">Retirement age goal:</label>
+                <input class="formInput" type="text" name="retireAge" id="retireAge" value="<%= data.profile.retireAge%>">
+                <label for="annualIncome" class="formLabel">Annual income:</label>
+                <input class="formInput" type="text" name="annualIncome" id="annualIncome" value="$<%= parseFloat(data.profile.annualIncome).toLocaleString() %>">
+                <label for="retireIncome" class="formLabel">Annual retirement income*:</label>
+                <input class="formInput" type="text" name="retireIncome" id="retireIncome" value="$<%= parseFloat(data.profile.retireIncome).toLocaleString() %>">
+                <label for="netWorth" class="formLabel">Liquid net worth:</label>
+                <input class="formInput" type="text" name="netWorth" id="netWorth" value="$<%= parseFloat(data.profile.netWorth).toLocaleString() %>">
+                <label for="monthlyExpenses" class="formLabel">Monthly expenses:</label>
+                <input class="formInput" type="text" name="monthlyExpenses" id="monthlyExpenses" value="$<%= parseFloat(data.profile.monthlyExpenses).toLocaleString() %>">
+                <label for="monthlySave" class="formLabel">Monthly savings:</label>
+                <input class="formInput" type="text" name="monthlySave" id="monthlySave" value="$<%= parseFloat(data.profile.monthlySave).toLocaleString() %>">
+                <label for="riskWilling" class="formLabel">Risk willingness (1-5):</label>
+                <input class="formInput"  type="text" name="riskWilling" id="riskWilling" value="<%= data.profile.riskWilling %>">
+                <div class="smlBlank"></div>
+                <button class="buttons" id="saveProfileButton">Save</button>
+                <div class="basic sizeUp"><a href="/profile">Return to profile.</a></div>
+                <div class="smlBlank"></div>
+                <div class="sizeDown basic">
+                    * This amount is calculated from your current salary minus your annual savings and payroll taxes. 
+                    It will be adjusted for inflation through retirement.
+                    As you adjust it here, keep in mind that you will no longer need to "save" in retirement, and your expenses will 
+                    likely be lower overall.
+                </div>
+            </div>
+            <div class="messages" id="updateMessage" style="display: none"></div>
         </div>
         <div class="medBlank"></div>
     </div>
     <script src="/javascripts/account.js"></script>
+    <script src="/javascripts/fullProfileEdit.js"></script>
 
 <% include footer %>

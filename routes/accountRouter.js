@@ -60,7 +60,8 @@ function getProfileData(user) {
                     // extract and format data
                     let profileData = {
                         'email': docs[0].user.email,
-                        'name': `${docs[0].profile.firstName} ${docs[0].profile.lastName}`
+                        'name': `${docs[0].profile.firstName} ${docs[0].profile.lastName}`,
+                        'profile': docs[0].profile
                     };
                     resolve(profileData);
                 }

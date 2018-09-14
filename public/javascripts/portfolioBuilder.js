@@ -31,7 +31,7 @@ function recommendations(riskNum) {
         },
         success(data, textStatus, jqXHR) {
             document.getElementById('allocationChartContainer').innerHTML = 
-            `<div class="headline">${data.name} Portfolio</div>
+            `<div class="headline">Your target allocation:<br>${data.name} Portfolio</div>
             <div class="flexH" id="allocationDetails">
                 <div class="chartContainer" id="allocationInnerChart">
                     <canvas class="chart" id="allocationChart" width="300" height="300"></canvas>

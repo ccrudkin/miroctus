@@ -3,9 +3,10 @@ TODO:
 -refactor bloated calculator.js script
 -move formulas to backend
 -get 'age' from (current year) - (birth year) across functions
--retirement income/standard of living
+-retirement income/standard of living option [x]
+-Detailed recommendation page
 -edit profile on-page
-    -profile editing validation improvements (no letters or non [$,] chars)
+    -profile editing validation improvements (no letters or non [$,] chars) [x]
     -refresh charts seamlessly (without reload)
 
 
@@ -35,7 +36,7 @@ TODO:
                     -iShares breakdown
     -Special advice
         -if not able to meet goal, suggest adjustments
-            -allow "live on less" option to adjust standard of living
+            -allow "live on less" option to adjust standard of living [x]
             -suggest changes in retirement age, monthly savings, risk, etc.
     -Help/learning page 
         -FAQ and resources

@@ -98,6 +98,7 @@ function newUser(data) {
                                         'lastName': `${data.lastName}`,
                                         'birthYear': `${data.birthYear}`,
                                         'annualIncome': `${data.annualIncome}`,
+                                        'retireIncome': `${parseFloat(data.annualIncome * .925 - data.monthlySave * 12)}`,
                                         'netWorth': `${data.netWorth}`,
                                         'age': `${new Date().getFullYear() - parseInt(data.birthYear)}`,
                                         'retireAge': `${data.retireAge}`,

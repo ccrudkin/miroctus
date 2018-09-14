@@ -1,10 +1,16 @@
 function submitData() {
 
     let data = `
+        firstName=${cleanInput(document.getElementById('firstName').value)}&
+        lastName=${cleanInput(document.getElementById('lastName').value)}&
+        birthYear=${cleanInput(document.getElementById('birthYear').value)}&
+        annualIncome=${cleanInput(document.getElementById('annualIncome').value)}&
         retireIncome=${cleanInput(document.getElementById('retireIncome').value)}&
         retireAge=${document.getElementById('retireAge').value}&
+        netWorth=${cleanInput(document.getElementById('netWorth').value)}&
         initInvest=${cleanInput(document.getElementById('initInvest').value)}&
         monthlySave=${cleanInput(document.getElementById('monthlySave').value)}&
+        monthlyExpenses=${cleanInput(document.getElementById('monthlyExpenses').value)}&
         riskWilling=${document.getElementById('riskWilling').value}
     `
     // keep the data human-readable above and machine-readable when sent
@@ -12,7 +18,7 @@ function submitData() {
     data = data.replace(reg, '');
     
     $.ajax({
-        url: '/profile/edit',
+        url: '/profile/edit/details',
         type: 'POST',
         data: data,
         error(jqXHR, textStatus, errorThrown) {
@@ -26,10 +32,9 @@ function submitData() {
                 $('#updateMessage').fadeIn();
                 // getUserData(); // not needed with reload
                 setTimeout(function() {
-                    // $('#updateMessage').fadeOut();
-                    location.reload(true);
+                    $('#updateMessage').fadeOut();
                 },
-                    1000
+                    3000
                 );
             } else {
                 let errors = '';

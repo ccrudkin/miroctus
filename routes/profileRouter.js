@@ -33,7 +33,7 @@ router.get('/portfolio/:portfolio', ensureAuthenticated, function(req, res) {
     res.send(portfolios[req.params.portfolio]);
 });
 
-/*
+/* Reintroduce for full profile editing beyond just investment value variables -- now on ACCOUNT page
 // GET portfolio builder page
 router.get('/edit', ensureAuthenticated, function(req, res) {
     getProfileData(req.user)
@@ -43,6 +43,33 @@ router.get('/edit', ensureAuthenticated, function(req, res) {
 */
 
 router.post('/edit', ensureAuthenticated, [
+    check('initInvest').isNumeric().withMessage('Portfolio value must be a valid number.'),
+    check('retireAge').isNumeric().withMessage('Retirement age must be a valid number.'),
+    check('retireIncome').custom((value, { req }) => parseFloat(value) > 0 ).withMessage('Retire income must be greater than 0.'),
+    check('monthlySave').isNumeric().withMessage('Monthly savings must be a valid number.'),
+    check('riskWilling').custom((value, { req }) => ['1', '2', '3', '4', '5'].includes(value)).withMessage('Risk willingness must be an integer from 1 to 5.')
+    ],
+    (req, res) => {
+        console.log(req.body);
+        const errorFormatter = ({ location, msg, param, value, nestedErrors }) => {
+            return `${msg}`;
+        };
+        const result = validationResult(req).formatWith(errorFormatter);
+        if (!result.isEmpty()) {
+            console.log(result.array());
+            res.send({ 'status': 'error', 'msg': result.array() });
+        } else {
+            // console.log(JSON.parse(req.body.data));
+            let data = req.body;
+            let user = req.user;
+            editUser(data, user)
+            .then((msg) => { res.send({ 'status': 'success', 'msg': [msg] }) })
+            .catch((err) => { res.send({ 'status': 'error', 'msg': [err] }) });
+        }
+});
+
+// full profile edit router (from account page) -- needs debugging before implementation
+router.post('/edit/details', ensureAuthenticated, [
     check('firstName').isLength({ min: 1 }).withMessage('First name is required.'),
     check('lastName').isLength({ min: 1 }).withMessage('Last name is required.'),
     check('birthYear').custom((value, { req }) => parseFloat(value) > 1899).withMessage('Valid birth year is required.')
@@ -50,6 +77,7 @@ router.post('/edit', ensureAuthenticated, [
     check('initInvest').isNumeric().withMessage('Portfolio value must be a valid number.'),
     check('retireAge').isNumeric().withMessage('Retirement age must be a valid number.'),
     check('annualIncome').custom((value, { req }) => parseFloat(value) > 0 ).withMessage('Annual income must be greater than 0.'),
+    check('retireIncome').custom((value, { req }) => parseFloat(value) > 0 ).withMessage('Retire income must be greater than 0.'),
     check('netWorth').isNumeric().withMessage('Net worth must be a valid number.'),
     check('monthlyExpenses').isNumeric().withMessage('Monthly expenses must be a valid number.'),
     check('monthlySave').isNumeric().withMessage('Monthly savings must be a valid number.'),
@@ -117,14 +145,9 @@ function editUser(data, user) {
                 { 'user.email': `${user}` },
                 {
                     $set: {
-                        'profile.firstName': `${data.firstName}`,
-                        'profile.lastName': `${data.lastName}`,
-                        'profile.birthYear': `${data.birthYear}`,
                         'profile.initInvest': `${data.initInvest}`,
                         'profile.retireAge': `${data.retireAge}`,
-                        'profile.annualIncome': `${data.annualIncome}`,
-                        'profile.netWorth': `${data.netWorth}`,
-                        'profile.monthlyExpenses': `${data.monthlyExpenses}`,
+                        'profile.retireIncome': `${data.retireIncome}`,
                         'profile.monthlySave': `${data.monthlySave}`,
                         'profile.riskWilling': `${data.riskWilling}`
                     }
